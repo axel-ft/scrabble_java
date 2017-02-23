@@ -1,5 +1,6 @@
 package com.scrabble;
 
+import java.lang.*;
 import java.util.Random;
 
 /**
@@ -55,17 +56,26 @@ public class Letter {
 	public void handPlayer() {
 		Random randoml = new Random();
 		for (int r = 0; r < this.handPlayer.length; r++) {
-			int n = randoml.nextInt(26) + 1;
+			int  n = randoml.nextInt(26) + 1;
 			for (int i = 0; i < this.handPlayer[r].length; i++) {
 				this.handPlayer[r][i] = this.letter[n][i];
-				System.out.println("Votre Main est : \n\r");
-				System.out.println("Alpha  Number  Points");
-				System.out.printf(this.handPlayer[r][i] + "       ");
+			}
+		}
+
+	}
+
+	public void getHand() {
+		System.out.println("Votre Main est : \n\r");
+		System.out.println("Alpha  Number  Points");
+		for (int i = 0; i < this.handPlayer.length; i++) {
+			for (int j = 0; j < this.handPlayer[i].length; j++) {
+				System.out.printf(this.letter[i][j]);
 			}
 			System.out.printf("\r\n");
 		}
 
 	}
+
 	/*
 	 * private void createUIComponents() { // TODO: place custom component
 	 * creation code here }

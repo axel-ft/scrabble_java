@@ -15,7 +15,7 @@ public class Main {
         String name = sc.nextLine();
         Player playerName = new Player(name);
         playerName.getName();
-        lettres.handPlayer();
+        lettres.getHand();
     }
     
     
