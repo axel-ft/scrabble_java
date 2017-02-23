@@ -1,1 +1,1 @@
-* Créer un jeu de Scrabble en Java
+# Créer un jeu de Scrabble en Java
