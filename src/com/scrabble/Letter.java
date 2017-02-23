@@ -68,7 +68,7 @@ public class Letter {
 		System.out.println("Alpha  Number  Points");
 		for (int i = 0; i < this.handPlayer.length; i++) {
 			for (int j = 0; j < this.handPlayer[i].length; j++) {
-				System.out.printf(this.letter[i][j] + "       ");
+				System.out.printf(this.handPlayer[i][j] + "       ");
 			}
 			System.out.printf("\r\n");
 		}
