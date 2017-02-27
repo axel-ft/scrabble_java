@@ -18,7 +18,7 @@ public class Main {
         lettres.getHand();*/
         
         
-        //TEST dictionnaire
+        //TEST dictionary
         Dictionary Dico = new Dictionary();
         System.out.println(Dico.checkWord("abecédaire"));
     }
