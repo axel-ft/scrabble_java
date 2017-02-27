@@ -226,7 +226,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-temps_par_tour: date",
+											"text": "-temps_Par_Tour: date",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -255,7 +255,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-max_lettres: int",
+											"text": "-max_Lettres: int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -400,7 +400,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-temps_restant: date",
+											"text": "-temps_Restant: date",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -513,7 +513,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+settemps_restant(): date",
+											"text": "+settemps_Restant(): date",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1126,7 +1126,7 @@
 											"containerChangeable": false,
 											"containerExtending": false,
 											"left": 112,
-											"top": 304,
+											"top": 288,
 											"width": 0,
 											"height": 13,
 											"autoResize": false,
@@ -1151,7 +1151,7 @@
 											"containerChangeable": false,
 											"containerExtending": false,
 											"left": 277,
-											"top": 607,
+											"top": 599,
 											"width": 230,
 											"height": 13,
 											"autoResize": false,
@@ -1177,7 +1177,7 @@
 											"containerChangeable": false,
 											"containerExtending": false,
 											"left": 112,
-											"top": 304,
+											"top": 288,
 											"width": 81,
 											"height": 13,
 											"autoResize": false,
@@ -1203,7 +1203,7 @@
 											"containerChangeable": false,
 											"containerExtending": false,
 											"left": 112,
-											"top": 304,
+											"top": 288,
 											"width": 0,
 											"height": 13,
 											"autoResize": false,
@@ -1223,7 +1223,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 272,
-									"top": 600,
+									"top": 592,
 									"width": 240,
 									"height": 25,
 									"autoResize": false,
@@ -1269,12 +1269,12 @@
 											"containerChangeable": false,
 											"containerExtending": false,
 											"left": 277,
-											"top": 630,
+											"top": 622,
 											"width": 230,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-cases_utilisées: char",
+											"text": "-cases_Utilisees: string",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1298,12 +1298,12 @@
 											"containerChangeable": false,
 											"containerExtending": false,
 											"left": 277,
-											"top": 645,
+											"top": 637,
 											"width": 230,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-case_compte_simple: char",
+											"text": "-case_Compte_Simple: string",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1327,12 +1327,12 @@
 											"containerChangeable": false,
 											"containerExtending": false,
 											"left": 277,
-											"top": 660,
+											"top": 652,
 											"width": 230,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-case_compte_double: char",
+											"text": "-case_Compte_Double: string",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1356,12 +1356,12 @@
 											"containerChangeable": false,
 											"containerExtending": false,
 											"left": 277,
-											"top": 675,
+											"top": 667,
 											"width": 230,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-case_compte triple: chat",
+											"text": "-case_Compte_Triple: string",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1377,7 +1377,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 272,
-									"top": 625,
+									"top": 617,
 									"width": 240,
 									"height": 68,
 									"autoResize": false
@@ -1411,12 +1411,12 @@
 											"containerChangeable": false,
 											"containerExtending": false,
 											"left": 277,
-											"top": 698,
+											"top": 690,
 											"width": 230,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setcases_utilisées(): int",
+											"text": "+setcases_Utilisees(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1440,12 +1440,12 @@
 											"containerChangeable": false,
 											"containerExtending": false,
 											"left": 277,
-											"top": 713,
+											"top": 705,
 											"width": 230,
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setlettres_sur_plateau(): char",
+											"text": "+setlettres_Sur_Plateau(): string",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1461,7 +1461,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 272,
-									"top": 693,
+									"top": 685,
 									"width": 240,
 									"height": 38,
 									"autoResize": false
@@ -1485,7 +1485,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 56,
-									"top": 152,
+									"top": 144,
 									"width": 10,
 									"height": 10,
 									"autoResize": false
@@ -1509,7 +1509,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 56,
-									"top": 152,
+									"top": 144,
 									"width": 10,
 									"height": 10,
 									"autoResize": false
@@ -1525,7 +1525,7 @@
 							"containerChangeable": true,
 							"containerExtending": false,
 							"left": 272,
-							"top": 600,
+							"top": 592,
 							"width": 240,
 							"height": 192,
 							"autoResize": false,
@@ -1795,7 +1795,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+verification mot(): bool",
+											"text": "+verification_Mot(): bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2961,7 +2961,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-poser_un_mot: string",
+											"text": "-poser_Un_Mot: string",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2990,7 +2990,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-passer_son_tour: bool",
+											"text": "-passer_Son_Tour: bool",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3045,7 +3045,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getmot_posé(vallues): string",
+											"text": "+getmot_Pose(vallues): string",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3074,7 +3074,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getlettrepioché(): char",
+											"text": "+getlettrepioche(): char",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4579,7 +4579,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 343,
-									"top": 568,
+									"top": 560,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -4613,7 +4613,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 356,
-									"top": 565,
+									"top": 557,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -4647,7 +4647,7 @@
 									"containerChangeable": false,
 									"containerExtending": false,
 									"left": 315,
-									"top": 572,
+									"top": 564,
 									"width": 0,
 									"height": 13,
 									"autoResize": false,
@@ -4727,7 +4727,7 @@
 								"$ref": "AAAAAAFaaxonsfeLmlM="
 							},
 							"lineStyle": 0,
-							"points": "327:463;327:488;328:488;328:600",
+							"points": "327:463;327:488;328:488;328:592",
 							"stereotypeDisplay": "label",
 							"showVisibility": true,
 							"showProperty": true,
@@ -5011,7 +5011,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFaakxmVyU/Xhk="
 							},
-							"name": "temps_par_tour",
+							"name": "temps_Par_Tour",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -5029,7 +5029,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFaakxmVyU/Xhk="
 							},
-							"name": "max_lettres",
+							"name": "max_Lettres",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -5119,7 +5119,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFaakxmVyU/Xhk="
 							},
-							"name": "temps_restant",
+							"name": "temps_Restant",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -5201,7 +5201,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFaakxmVyU/Xhk="
 							},
-							"name": "settemps_restant",
+							"name": "settemps_Restant",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -5536,11 +5536,11 @@
 							"_parent": {
 								"$ref": "AAAAAAFaan09KCYWioI="
 							},
-							"name": "cases_utilisées",
+							"name": "cases_Utilisees",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "char",
+							"type": "string",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -5554,11 +5554,11 @@
 							"_parent": {
 								"$ref": "AAAAAAFaan09KCYWioI="
 							},
-							"name": "case_compte_simple",
+							"name": "case_Compte_Simple",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "char",
+							"type": "string",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -5572,11 +5572,11 @@
 							"_parent": {
 								"$ref": "AAAAAAFaan09KCYWioI="
 							},
-							"name": "case_compte_double",
+							"name": "case_Compte_Double",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "char",
+							"type": "string",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -5590,11 +5590,11 @@
 							"_parent": {
 								"$ref": "AAAAAAFaan09KCYWioI="
 							},
-							"name": "case_compte triple",
+							"name": "case_Compte_Triple",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
-							"type": "chat",
+							"type": "string",
 							"isReadOnly": false,
 							"isOrdered": false,
 							"isUnique": false,
@@ -5610,7 +5610,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFaan09KCYWioI="
 							},
-							"name": "setcases_utilisées",
+							"name": "setcases_Utilisees",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -5641,7 +5641,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFaan09KCYWioI="
 							},
-							"name": "setlettres_sur_plateau",
+							"name": "setlettres_Sur_Plateau",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -5655,7 +5655,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "char",
+									"type": "string",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -5707,7 +5707,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFaan2oQCZAuYI="
 							},
-							"name": "verification mot",
+							"name": "verification_Mot",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -5771,7 +5771,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFaaoRFBzFSyW4="
 							},
-							"name": "poser_un_mot",
+							"name": "poser_Un_Mot",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -5789,7 +5789,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFaaoRFBzFSyW4="
 							},
-							"name": "passer_son_tour",
+							"name": "passer_Son_Tour",
 							"visibility": "private",
 							"isStatic": false,
 							"isLeaf": false,
@@ -5809,7 +5809,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFaaoRFBzFSyW4="
 							},
-							"name": "getmot_posé",
+							"name": "getmot_Pose",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -5824,7 +5824,6 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -5856,7 +5855,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFaaoRFBzFSyW4="
 							},
-							"name": "getlettrepioché",
+							"name": "getlettrepioche",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
