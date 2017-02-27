@@ -1,5 +1,5 @@
 package com.scrabble;
-import java.util.*;
+
 import java.lang.String;
 
 /**
@@ -8,14 +8,19 @@ import java.lang.String;
 public class Main {
 
     public static void main(String[] args) {
-        Letter lettres = new Letter();
+        /*Letter lettres = new Letter();
         lettres.displayLettre();
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillir remplir votre pseudo");
         String name = sc.nextLine();
         Player playerName = new Player(name);
         playerName.getName();
-        lettres.getHand();
+        lettres.getHand();*/
+        
+        
+        //TEST dictionary
+        Dictionary Dico = new Dictionary();
+        System.out.println(Dico.checkWord("abecédaire"));
     }
     
     
