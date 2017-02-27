@@ -1,5 +1,6 @@
 package com.scrabble;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -8,7 +9,8 @@ import java.util.Random;
 public class Letter {
 
 	String[][] letter = new String[27][3];
-	String[][] handPlayer = new String[7][4];
+	String[][] handPlayer = new String[7][3];
+
 	public Letter() {
 		this.letter[0] = new String[] { "*", "2", "0" };
 		this.letter[1] = new String[] { "a", "9", "1" };
@@ -50,25 +52,28 @@ public class Letter {
 
 	}
 
-	public void LetterHand() {
+	public String[][] letterHand() {
 		Random randoml = new Random();
 		for (int r = 0; r < this.handPlayer.length; r++) {
 			int n = randoml.nextInt(26) + 1;
 			for (int t = 0; t < this.handPlayer[r].length; t++) {
-				this.handPlayer[r] = new String[] { this.letter[n][t] };
+				this.handPlayer[r][t] = this.letter[n][t];
+
 			}
 		}
+		return this.handPlayer;
+
 	}
 
-	public void getHand() {
+	public void getHand(String handPlayer[][]) {
 		System.out.println("Votre Main est : \n");
 		System.out.println("Alpha  Number  Points");
-		for (int p = 0; p < this.handPlayer.length; p++) {
-			for (int i = 0; i < 3; i++) {
-				System.out.printf(this.handPlayer[p][i] + "    ");
+		for (int t = 0; t < this.handPlayer.length; t++) {
+			for (int r = 0; r < this.handPlayer[t].length; r++) {
+				System.out.println(this.handPlayer[t][r]);
 			}
-			System.out.printf("\r\n");
 		}
+		System.out.printf("\r\n");
 	}
 
 	/*

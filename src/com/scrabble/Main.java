@@ -18,7 +18,8 @@ public class Main {
 		String name = sc.nextLine();
 		Player playerName = new Player(name);
 		playerName.getName();
-		lettres.getHand();
+		String[][] handPlayer = lettres.letterHand();
+		lettres.getHand (handPlayer);
 	}
 
 }
