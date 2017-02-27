@@ -5,6 +5,16 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * 	<b>Classe Dictionnaire</b>
+ * 	<p>Créée le 27/02/2017 et modifiée le 27/02/2017</p>
+ * 	<p>Cette classe contient un dictionnaire parsé depuis un fichier texte et permet de vérifier la présence d'un mot dans celui-ci</p>
+ * 	
+ *  @author Axel Floquet-Trillot 
+ *  @version 0.2
+ * 
+ */
 public class Dictionary {
 	
 	private List<String> dictionary;
