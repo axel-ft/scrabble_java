@@ -1,6 +1,7 @@
 package com.scrabble;
 
 import java.io.*;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class Dictionary {
 
 		        String dicoLine = dicoFile.readLine();
 		        while (dicoLine != null) {
-		            dictionary.add(dicoLine.toUpperCase());
+		            dictionary.add(Normalizer.normalize(normalizeWord(dicoLine), Normalizer.Form.NFD));
 		            dicoLine = dicoFile.readLine();
 		        }
 
@@ -31,7 +32,14 @@ public class Dictionary {
 		    }
 	}
 	
-	public boolean isWordInDico(String input) {
+	public String normalizeWord(String input) {
+		input = Normalizer.normalize(input.toUpperCase(), Normalizer.Form.NFD);
+		input = input.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+		return input;
+	}
+	
+	public boolean checkWord(String input) {
+		input = normalizeWord(input);
 		if (this.dictionary.indexOf(input) == -1) {
 			return false;
 		} else if (this.dictionary.indexOf(input) >= 0 && this.dictionary.indexOf(input) <= 22740) {

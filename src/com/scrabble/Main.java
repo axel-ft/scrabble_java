@@ -1,5 +1,5 @@
 package com.scrabble;
-import java.util.*;
+
 import java.lang.String;
 
 /**
@@ -20,7 +20,7 @@ public class Main {
         
         //TEST dictionnaire
         Dictionary Dico = new Dictionary();
-        System.out.println(Dico.isWordInDico("abandonnés".toUpperCase()));
+        System.out.println(Dico.checkWord("abecédaire"));
     }
     
     
