@@ -49,7 +49,6 @@ public class Letter {
 			}
 			System.out.printf("\r\n");
 		}
-
 	}
 
 	public String[][] letterHand() {
@@ -62,7 +61,6 @@ public class Letter {
 			}
 		}
 		return this.handPlayer;
-
 	}
 
 	public void getHand(String handPlayer[][]) {
