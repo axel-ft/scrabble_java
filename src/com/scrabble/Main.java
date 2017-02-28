@@ -14,11 +14,14 @@ public class Main {
         System.out.println("Veuillir remplir votre pseudo");
         String name = sc.nextLine();
         Player playerName = new Player(name);
+        
         playerName.getName();
         lettres.getHand();*/
         
+    	
+    	
         
-        //TEST dictionary
+        //TEST dictionnaire
         Dictionary Dico = new Dictionary();
         System.out.println(Dico.checkWord("abecédaire"));
     }

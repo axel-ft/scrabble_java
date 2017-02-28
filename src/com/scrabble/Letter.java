@@ -62,7 +62,7 @@ public class Letter {
 		}
 
 	}
-
+	
 	public void getHand() {
 		System.out.println("Votre Main est : \n\r");
 		System.out.println("Alpha  Number  Points");
