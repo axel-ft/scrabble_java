@@ -6,16 +6,16 @@ import java.util.Random;
  * Created by pault on 23/02/2017.
  */
 
-public class Pawn {
+public class Draw {
 	Letter[] pawn = new Letter[27];
 
-	public Pawn() { // Définition de l'alphabet avec c'est points et qte
+	public Draw() { // Définition de l'alphabet avec c'est points et qte
 		this.pawn[0] = new Letter('*', 0, 2);
 		this.pawn[1] = new Letter('a', 1, 9);
 		this.pawn[2] = new Letter('b', 3, 2);
 		this.pawn[3] = new Letter('c', 3, 2);
-		this.pawn[4] = new Letter('d', 2, 2);
-		this.pawn[5] = new Letter('e', 1, 2);
+		this.pawn[4] = new Letter('d', 2, 3);
+		this.pawn[5] = new Letter('e', 1, 15);
 		this.pawn[6] = new Letter('f', 4, 2);
 		this.pawn[7] = new Letter('g', 2, 2);
 		this.pawn[8] = new Letter('h', 4, 2);
@@ -39,7 +39,7 @@ public class Pawn {
 		this.pawn[26] = new Letter('z', 10, 1);
 	}
 
-	public void displayPions() { // Afficher l'alphabet
+	public void displayPawns() { // Afficher l'alphabet
 		for (int i = 0; i < this.pawn.length; i++) {
 			System.out.printf(this.pawn[i].info());
 			System.out.printf("\r\n");
@@ -47,15 +47,22 @@ public class Pawn {
 
 	}
 
-	public Letter pioche() { // Pioche aléatoire
+	public Letter draw() { // Pioche aléatoire
 		Random randoml = new Random();
 		int n = randoml.nextInt(27);
 		while(this.pawn[n].getQty() <= 0){
 		n = randoml.nextInt(27);	
 	}
-		Letter pioche = this.pawn[n];
+		Letter draw = this.pawn[n];
 		this.pawn[n].decQty();
-		System.out.println(this.pawn[n].getAlpha() +"     "+ this.pawn[n].getPoint());
-		return pioche;
+		return draw;
+	}
+	
+	public int remainingPawns() {
+		int remainingPawns = 0;
+		for (int i = 0; i < this.pawn.length; i++) {
+			remainingPawns += this.pawn[i].getQty();
+		}
+		return remainingPawns;
 	}
 }
