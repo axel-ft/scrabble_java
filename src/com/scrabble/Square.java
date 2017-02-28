@@ -67,6 +67,8 @@ public class Square {
     public char SquareIsUsed(){
         if (this.needOut){
             return this.content;
+        } else {
+            return null;
         }
     }
 }
