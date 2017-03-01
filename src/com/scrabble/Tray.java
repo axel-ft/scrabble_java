@@ -1,30 +1,39 @@
 package com.scrabble;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
+/**
+ * The Class Tray.
+ */
 public class Tray {
+    
+    /** The x square coordinate */
     private int x;
+    
+    /** The y square coordinate */
     private int y;
+    
+    /** The tray. */
     private Square[][] tray = new Square[15][15];
     
+	/** Triple Letter color constant */
 	public static final Color TL = new Color(48,192,240);
+    
+    /** Double Letter color constant */
     public static final Color DL = new Color(166,233,241);
+    
+    /** Triple Word color constant */
     public static final Color TW = new Color(211,14,7);
+    
+    /** Double Letter color constant */
     public static final Color DW = new Color(238,180,179);
+    
+    /** Standard square color constant */
     public static final Color STD = new Color(201,209,204);
 
+    /**
+     * Instantiates a new tray.
+     */
     public Tray() {
         //[line], [column], (word, letter)
         //8 TWS, 24 DLS, 12 TLS, 16 DWS
@@ -216,6 +225,15 @@ public class Tray {
         }
     }
     
+    /**
+     * Gets a specific square.
+     * 
+     * @author Axel FLOQUET-TRILLOT
+     * 
+     * @param x
+     * @param y
+     * @return the specific square
+     */
     public Square getSpecificSquare(int x, int y) {
     	if (x < 15 && y < 15) {
     		return tray[x][y];
@@ -223,69 +241,4 @@ public class Tray {
     		return null;
     	}
     }
-}
-
-class GTray extends JPanel {
-	private static final long serialVersionUID = 6176490152889300350L;
-	private static final int WIDTH = 40;
-	private static final int HEIGHT = WIDTH;
-	private static final int PREF_W = 15 * 40 + 1;
-	private static final int PREF_H = 15 * 40 + 1;
-	private Rectangle[][] squares = new Rectangle[15][15];
-	private Color[][] colors = new Color[15][15];
-	
-	public GTray(Tray tray) {
-		for (int x = 0; x < 15; x++) {
-	    	  for (int y = 0; y < 15; y++) {
-	    		  squares[x][y] = new Rectangle(x * WIDTH, y * HEIGHT, WIDTH, HEIGHT);
-	    		  colors[x][y] = tray.getSpecificSquare(x, y).getColor();
-	      	}
-	    }
-	}
-
-	@Override
-	public Dimension getPreferredSize() {
-	      return new Dimension(PREF_W, PREF_H);
-	}
-
-	@Override
-	protected void paintComponent(Graphics g) {
-	   super.paintComponent(g);
-	   Graphics2D g2 = (Graphics2D) g;
-	   for (int x = 0; x < 15; x++) {
-	    	  for (int y = 0; y < 15; y++) {
-	    		  g2.setColor(colors[x][y]);
-	    		  g2.fill(squares[x][y]);
-	    		  g2.setColor(Color.black);
-	    		  g2.draw(squares[x][y]);
-	      	}
-	   }
-	   
-	  	g2.setFont(new Font("Arial", Font.PLAIN, 9));
-
-	   for (int x = 0; x < 15; x++) {
-	    	  for (int y = 0; y < 15; y++) {
-	    		  	if (colors[x][y].equals(new Color(211,14,7))) {
-	    		  		g2.drawString("MOT", y * WIDTH + 12, x * HEIGHT + 18);
-	    		  		g2.drawString("TRIPLE", y * WIDTH + 4 , x * HEIGHT + 30);
-	    		  	} else if (colors[x][y].equals(new Color(238,180,179)) && (x != 7 && y != 7)) {
-	    		  		g2.drawString("MOT", y * WIDTH + 12, x * HEIGHT + 18);
-	    		  		g2.drawString("DOUBLE", y * WIDTH + 1 , x * HEIGHT + 30);
-	    		  	} else if (colors[x][y].equals(new Color(48,192,240))) {
-	    		  		g2.drawString("LETTRE", y * WIDTH + 4, x * HEIGHT + 18);
-	    		  		g2.drawString("TRIPLE", y * WIDTH + 4 , x * HEIGHT + 30);
-	    		  	} else if (colors[x][y].equals(new Color(166,233,241))) {
-	    		  		g2.drawString("LETTRE", y * WIDTH + 4, x * HEIGHT + 18);
-	    		  		g2.drawString("DOUBLE", y * WIDTH + 1 , x * HEIGHT + 30);
-	    		  	} else if (x == 7 && y == 7) {
-	    		  		try {
-	    		  	      Image img = ImageIO.read(new File("star.png"));
-	    		  	      g2.drawImage(img, WIDTH * 15 / 2 - 15, HEIGHT * 15 / 2 - 15, WIDTH - 10, HEIGHT - 10, this);
-	    		  	    } catch (IOException e) {
-	    		  	      e.printStackTrace();
-	    		  	    }  
-	    		  	}
-	    	  }
-	   }
-	}
 }

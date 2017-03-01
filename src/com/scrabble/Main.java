@@ -8,6 +8,9 @@ import java.lang.String;
 public class Main {
 	public static void main(String[] args) {
 		Window fenetre = new Window();
+		fenetre.addMenu();
+		fenetre.addTray();
+		fenetre.display();
 		
 		Draw pioche = new Draw();
 		//pioche.displayPawns();
