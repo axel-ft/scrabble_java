@@ -1,5 +1,7 @@
 package com.scrabble;
 
+import java.awt.Color;
+
 /**
  *      <h1>Created by Valentin on 2/27/17 for the java school project</h1> <br>
  * <p>The Square class goal is to know all about the square selected : </p>
@@ -8,6 +10,7 @@ package com.scrabble;
  *     <li>The letter multiplier;</li>
  *     <li>And the content on the square.</li>
  * </ul>
+ * <p>Modified by Axel on 3/1/17 : added color attribute
  */
 public class Square {
 
@@ -15,6 +18,7 @@ public class Square {
     private int letterMultiplier;
     private char content;
     private boolean needOut;
+    private Color color;
 
     /**
      * <h2>Constructor</h2><br><p>... which define attributes for the selected square
@@ -22,11 +26,12 @@ public class Square {
      * @param letterMultiplier
      * And set the 'content' variable as null</p>
      */
-    public Square(int wordMultiplier, int letterMultiplier) {
+    public Square(int wordMultiplier, int letterMultiplier, Color color) {
 
         this.wordMultiplier = wordMultiplier;
         this.letterMultiplier = letterMultiplier;
         this.content = '\u0000';
+        this.color = color;
     }
 
     /**
@@ -42,7 +47,12 @@ public class Square {
      * <p> @return the square's content </p>
      */
     public char getSquareContent(){
-        return content;
+        return this.content;
+    }
+    
+    
+    public Color getColor() {
+    	return this.color;
     }
 
     /**
@@ -67,6 +77,8 @@ public class Square {
     public char SquareIsUsed(){
         if (this.needOut){
             return this.content;
+        } else {
+        	return '\u0000';
         }
     }
 }

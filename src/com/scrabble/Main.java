@@ -10,7 +10,7 @@ public class Main {
 		Window fenetre = new Window();
 		
 		Draw pioche = new Draw();
-		pioche.displayPawns();
+		//pioche.displayPawns();
 		Player player1 = new Player();
 		player1.getName();
 		System.out.println(pioche.remainingPawns());
