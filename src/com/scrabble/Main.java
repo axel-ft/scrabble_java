@@ -9,22 +9,22 @@ public class Main {
 	public static void main(String[] args) {
 		Window fenetre = new Window();
 		fenetre.addMenu();
-		fenetre.addLeftBar();
+		fenetre.addGameButtons();
 		fenetre.addTray();
-		fenetre.display();
 		
 		Draw pioche = new Draw();
-		Words word = new Words();
+		//Words word = new Words();
 		//pioche.displayPawns();
 		Player player1 = new Player();
-		player1.getName();
+		player1.getPlayerName();
 		System.out.println(pioche.remainingPawns());
 		player1.setHand(pioche);
 		player1.displayHand();
 		System.out.println(pioche.remainingPawns());
-		Letter uneLettre = pioche.draw();
-		System.out.println(uneLettre.info());
+		fenetre.addHandPlayer(player1);
 		System.out.println(pioche.remainingPawns());
-		System.out.println(word.mots);
+		//System.out.println(word.mots);
+		
+		fenetre.display();
 	}
 }
