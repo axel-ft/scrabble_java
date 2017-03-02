@@ -61,7 +61,7 @@ public class Square {
 		return this.content;
 	}
 
-	public Color getColo() {
+	public Color getColor() {
 		return this.color;
 	}
 
