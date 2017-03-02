@@ -2,19 +2,13 @@ package com.scrabble;
 
 import java.util.Random;
 
-// TODO: Auto-generated Javadoc
 /**
  * Created by pault on 23/02/2017.
  */
 
 public class Draw {
-	
-	/** The pawn. */
 	Letter[] pawn = new Letter[27];
 
-	/**
-	 * Instantiates a new draw.
-	 */
 	public Draw() { // Définition de l'alphabet avec c'est points et qte
 		this.pawn[0] = new Letter('*', 0, 2);
 		this.pawn[1] = new Letter('a', 1, 9);
@@ -45,9 +39,6 @@ public class Draw {
 		this.pawn[26] = new Letter('z', 10, 1);
 	}
 
-	/**
-	 * Display pawns.
-	 */
 	public void displayPawns() { // Afficher l'alphabet
 		for (int i = 0; i < this.pawn.length; i++) {
 			System.out.printf(this.pawn[i].info());
@@ -56,11 +47,6 @@ public class Draw {
 
 	}
 
-	/**
-	 * Draw.
-	 *
-	 * @return the letter
-	 */
 	public Letter draw() { // Pioche aléatoire
 		Random randoml = new Random();
 		int n = randoml.nextInt(27);
@@ -72,11 +58,6 @@ public class Draw {
 		return draw;
 	}
 	
-	/**
-	 * Remaining pawns.
-	 *
-	 * @return the int
-	 */
 	public int remainingPawns() {
 		int remainingPawns = 0;
 		for (int i = 0; i < this.pawn.length; i++) {

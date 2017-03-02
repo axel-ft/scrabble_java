@@ -2,17 +2,10 @@ package com.scrabble;
 
 import java.lang.String;
 
-// TODO: Auto-generated Javadoc
 /**
  * Created by pault on 23/02/2017.
  */
 public class Main {
-	
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 */
 	public static void main(String[] args) {
 		Window fenetre = new Window();
 		fenetre.addMenu();
