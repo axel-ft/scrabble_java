@@ -1,16 +1,19 @@
 package com.scrabble;
 
-import java.util.*;
 import java.lang.String;
 
 /**
  * Created by pault on 23/02/2017.
  */
 public class Main {
-
 	public static void main(String[] args) {
+		Window fenetre = new Window();
+		fenetre.addMenu();
+		fenetre.addTray();
+		fenetre.display();
+		
 		Draw pioche = new Draw();
-		pioche.displayPawns();
+		//pioche.displayPawns();
 		Player player1 = new Player();
 		player1.getName();
 		System.out.println(pioche.remainingPawns());
