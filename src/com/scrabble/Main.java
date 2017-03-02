@@ -9,6 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		Window fenetre = new Window();
 		fenetre.addMenu();
+		fenetre.addLeftBar();
 		fenetre.addTray();
 		fenetre.display();
 		

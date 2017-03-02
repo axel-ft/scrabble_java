@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class Dictionary {
 	
+	private static final int SIZEOF_DICTIONARY = 22740;
 	private List<String> dictionary;
 	
 	/**
@@ -80,7 +81,7 @@ public class Dictionary {
 		input = normalizeWord(input);
 		if (this.dictionary.indexOf(input) == -1) {
 			return false;
-		} else if (this.dictionary.indexOf(input) >= 0 && this.dictionary.indexOf(input) <= 22740) {
+		} else if (this.dictionary.indexOf(input) >= 0 && this.dictionary.indexOf(input) <= SIZEOF_DICTIONARY) {
 			return true;
 		} else {
 			return false;
