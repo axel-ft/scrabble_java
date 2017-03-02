@@ -7,12 +7,13 @@ import java.lang.String;
  */
 public class Main {
 	public static void main(String[] args) {
-		Window fenetre = new Window();
-		fenetre.addMenu();
-		fenetre.addTray();
-		fenetre.display();
+		//Window fenetre = new Window();
+		//fenetre.addMenu();
+		//fenetre.addTray();
+		//fenetre.display();
 		
 		Draw pioche = new Draw();
+		Words word = new Words();
 		//pioche.displayPawns();
 		Player player1 = new Player();
 		player1.getName();
@@ -23,5 +24,6 @@ public class Main {
 		Letter uneLettre = pioche.draw();
 		System.out.println(uneLettre.info());
 		System.out.println(pioche.remainingPawns());
+		System.out.println(word.mots);
 	}
 }
