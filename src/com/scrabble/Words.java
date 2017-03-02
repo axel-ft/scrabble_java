@@ -7,6 +7,8 @@ public class Words {
 	
 	public String mots;
 
+	private String[] words;
+
 	private static Scanner scan;
 
 	public Words()
@@ -15,8 +17,8 @@ public class Words {
 		scan = new Scanner(System.in);
 		this.mots = scan.nextLine();
 		System.out.println("Votre Mot est " + this.mots);
-		String[] words = this.mots.split("");
-		System.out.println(Arrays.deepToString(words));
+		this.words = this.mots.split("");
+		System.out.println(Arrays.deepToString(this.words));
 	}
 	
 	
