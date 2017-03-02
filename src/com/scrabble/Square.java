@@ -83,35 +83,6 @@ public class Square {
 		}
 	}
 
-<<<<<<< HEAD
-    /**
-     * <h3> Function isSquareUsed : </h3><br>
-     * <p> Boolean test to know if the Square is used, if it's true variable needOut is true </p>
-     * @return
-     */
-    public boolean isSquareUsed(){
-        if (this.content=='\u0000'){
-            return false;
-        }else{
-            this.needOut = true;
-            return true;
-        }
-    }
-
-    /**
-     * <h3>Function SquareIsUsed :</h3>
-     * <p>return the square content if the needOut variable is true</p>
-     * @return
-     */
-    public char SquareIsUsed(){
-        if (this.needOut){
-            return this.content;
-        } else {
-            return '\u0000';
-        }
-    }
-}
-=======
 	/**
 	 * <h3>Function SquareIsUsed :</h3>
 	 * <p>
@@ -128,4 +99,3 @@ public class Square {
 		}
 	}
 }
->>>>>>> 96517079fd1ee6e5afc4c0bbb8c675dee62d4300

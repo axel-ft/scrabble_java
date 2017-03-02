@@ -85,6 +85,7 @@ public class Window extends JFrame implements ActionListener{
 	public void addHandPlayer(Player player) {
 		GridBagConstraints c = new GridBagConstraints();
 		GPlayer gplayer = new GPlayer(player);
+		gplayer.setBackground(Color.LIGHT_GRAY);
 		c.weightx = 0.2;
 		c.weighty = 0.5;
 		c.fill = GridBagConstraints.CENTER;
