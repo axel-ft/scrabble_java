@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -12,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-public class Window extends JFrame {
+public class Window extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -21,6 +24,10 @@ public class Window extends JFrame {
 	private static final int WIDTH = 900;
 	private static final int HEIGHT = 700;
 	
+	
+	
+	
+	Draw pioche = new Draw();
 	public Window() {
 		super("Scrabble");
 		this.setIconImage(new ImageIcon("icon16.png").getImage());
@@ -54,6 +61,7 @@ public class Window extends JFrame {
 		GridBagConstraints c = new GridBagConstraints();
 		JPanel leftBar = new JPanel();
 		JButton pick = new JButton("Piocher");
+		pick.addActionListener(this);
 		leftBar.add(pick);
 		c.weightx = 0.5;
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -63,6 +71,11 @@ public class Window extends JFrame {
 		getContentPane().add(leftBar, c);
 	}
 	
+	public void actionPerformed(ActionEvent e){
+		
+		Letter uneLettre = pioche.draw();
+		System.out.println(uneLettre.info());
+	}
 	public void addTray() {
 		GridBagConstraints c = new GridBagConstraints();
 		Tray tray = new Tray();
