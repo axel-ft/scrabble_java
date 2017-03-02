@@ -63,6 +63,15 @@ public class GTray extends JPanel {
 		}
 	}
 	
+	public static int getPREF_W() {
+		return PREF_W;
+	}
+	
+
+	public static int getPREF_H() {
+		return PREF_H;
+	}
+	
 	/**
 	 * Adds the labels to the squares depending to their color.
 	 *
