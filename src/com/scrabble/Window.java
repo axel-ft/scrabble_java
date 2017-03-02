@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -13,7 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Window extends JFrame {
+public class Window extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -21,6 +24,8 @@ public class Window extends JFrame {
 	private static final long serialVersionUID = -3015881863463738361L;
 	private static final int WIDTH = 1000;
 	private static final int HEIGHT = 700;
+	
+	Draw pioche = new Draw();
 
 	public Window() {
 		super("Scrabble");
@@ -55,11 +60,11 @@ public class Window extends JFrame {
 	public void addGameButtons() {
 		GridBagConstraints c = new GridBagConstraints();
 		JPanel leftBar = new JPanel();
-
 		leftBar.setLayout(new BoxLayout(leftBar, BoxLayout.Y_AXIS));
 		leftBar.setBackground(Color.LIGHT_GRAY);
 		JButton pick = new JButton("Changer mes lettres");
 		pick.setAlignmentX(CENTER_ALIGNMENT);
+		pick.addActionListener(this);
 		leftBar.add(pick);
 		
 		leftBar.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -89,6 +94,12 @@ public class Window extends JFrame {
 		c.gridy = 2;
 		c.gridwidth = 1;
 		getContentPane().add(gplayer, c);
+	}
+
+	public void actionPerformed(ActionEvent e){
+		
+		Letter uneLettre = pioche.draw();
+		System.out.println(uneLettre.info());
 	}
 
 	public void addTray() {

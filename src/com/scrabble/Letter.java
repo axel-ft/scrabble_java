@@ -1,14 +1,14 @@
 package com.scrabble;
 
 public class Letter {
-	private char alpha;
+	private String alpha;
 	private int point;
 	private int qty;
 
 	public Letter() {
 	}
 
-	public Letter(char alpha, int point, int qty) {
+	public Letter(String alpha, int point, int qty) {
 		this.alpha = alpha;
 		this.qty = qty;
 		this.point = point;
@@ -18,7 +18,7 @@ public class Letter {
 		this.qty--;
 	}
 
-	public char getAlpha() {
+	public String getAlpha() {
 		return this.alpha;
 	}
 
