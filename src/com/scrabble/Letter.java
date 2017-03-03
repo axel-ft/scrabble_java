@@ -3,19 +3,19 @@ package com.scrabble;
 public class Letter {
 	private String alpha;
 	private int point;
-	private int qty;
+	private int qtyInDraw;
 
 	public Letter() {
 	}
 
 	public Letter(String alpha, int point, int qty) {
 		this.alpha = alpha;
-		this.qty = qty;
+		this.qtyInDraw = qty;
 		this.point = point;
 	}
 
-	public void decQty() {
-		this.qty--;
+	public void decQtyInDraw() {
+		this.qtyInDraw--;
 	}
 
 	public String getAlpha() {
@@ -26,11 +26,11 @@ public class Letter {
 		return this.point;
 	}
 
-	public int getQty() {
-		return this.qty;
+	public int getQtyInDraw() {
+		return this.qtyInDraw;
 	}
 	public String info(){
-		return this.alpha + "   "  + this.qty + "   " +  this.point;
+		return this.alpha + "   "  + this.qtyInDraw + "   " +  this.point;
 	}
 
 }

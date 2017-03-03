@@ -54,8 +54,8 @@ public class Player {
 	
 	public void setHand(Draw draw) {
 		for (int i = 0; i < MAXLETTERS; i++) {
-			if(tileSet[i] == null && draw.remainingPawns() > 0) {
-				this.tileSet[i] = draw.draw();
+			if(tileSet[i] == null && draw.remainingTiles() > 0) {
+				this.tileSet[i] = draw.drawTile();
 			}
 		}
 	}

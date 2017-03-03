@@ -4,59 +4,48 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Words {
-	
-	public String mots;
+
+	public String mot;
 
 	private String[] words;
 
 	private static Scanner scan;
 
-	public Words()
-	{
+	public Words() {
 		System.out.println("Ajouter Votre Mot");
 		scan = new Scanner(System.in);
-		this.mots = scan.nextLine();
-		System.out.println("Votre Mot est " + this.mots);
-		this.words = this.mots.split("");
+		this.mot = scan.nextLine();
+		System.out.println("Votre Mot est " + this.mot);
+		this.words = this.mot.split("");
 		System.out.println(Arrays.deepToString(this.words));
 	}
 
-
 	/**
-	 * @author Valentin, Calcul du score avec l'aide de 2 autres mÃ©thodes dans Draw
-	 * returnCaseIndice() & returnPoint();
+	 * @author Valentin, Calcul du score avec l'aide de 2 autres méthodes dans
+	 *         Draw returnCaseIndice() & returnPoint();
 	 * @return
 	 *
-	 * Fonctionnement:
+	 * 		Fonctionnement:
 	 *
-	 * Le mot saisie par l'utilisateur scindÃ© en tableau est rÃ©cupÃ©rer.
-	 * Une boucle for permet de rÃ©aliser l'action de comptage de point pour chaque lettre du mot posÃ©.
-	 * la lettre rÃ©cupÃ©rer va Ãªtre comparÃ© dans le tableau alphabÃ©tique (Draw.java) et resortira le numÃ©ro de case du tableau contenant la lettre.
-	 * Puis avec le numÃ©ro de case, on cherche le point correspondant Ã  la lettre.
-	 * On retourne la valeur et on incrÃ©mente cette valeur dans la variable score.
-	 * On recommence pour la lettre suivante du mot.
+	 *         Le mot saisi par l'utilisateur est scindé en tableau est
+	 *         récupéré. Une boucle for permet de réaliser l'action de comptage
+	 *         de points pour chaque lettre du mot posé. la lettre récupérée va
+	 *         être comparée dans le tableau alphabétique (Draw.java) et
+	 *         ressortira le numéro de case du tableau contenant la lettre. Puis
+	 *         avec le numéro de case, on cherche le nombre de points
+	 *         correspondant à la lettre. On retourne la valeur et on incrémente
+	 *         cette valeur dans la variable score. On recommence pour la lettre
+	 *         suivante du mot.
 	 */
-	public int calScore() {
+	public int calScore(Draw gameDraw) {
+		int wordScore = 0;
 
-		Draw newDraw = new Draw();
-        int arrayLenght;
-        int i = 0;
-        int score = 0;
-        String wordLetter;
-
-        arrayLenght = this.words.length;
-
-        for (i=0;i != arrayLenght;i++){
-
-        	wordLetter = this.words[i];
-        	newDraw.returnCaseIndice(wordLetter);
-			int scoreLetter = newDraw.returnPoint();
-
-			score += scoreLetter;
-			return score;
-        }
-		
-	return score;
+		for (int i = 0; i < this.words.length; i++) {
+			if (gameDraw.returnCaseIndice(this.words[i]) != null) {
+				wordScore += gameDraw.returnCaseIndice(this.words[i]).getPoint();
+			}
+		}
+		return wordScore;
 	}
 
 }

@@ -29,7 +29,7 @@ public class Window extends JFrame implements ActionListener{
 
 	public Window() {
 		super("Scrabble");
-		this.setIconImage(new ImageIcon("icon16.png").getImage());
+		this.setIconImage(new ImageIcon("content/icon32.png").getImage());
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -99,7 +99,7 @@ public class Window extends JFrame implements ActionListener{
 
 	public void actionPerformed(ActionEvent e){
 		
-		Letter uneLettre = pioche.draw();
+		Letter uneLettre = pioche.drawTile();
 		System.out.println(uneLettre.info());
 	}
 

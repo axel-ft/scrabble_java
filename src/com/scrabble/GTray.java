@@ -82,15 +82,15 @@ public class GTray extends JPanel {
 	 */
 	public void addLabels(Graphics2D g2) {
 		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		Font roboto = null;
+		Font weblysleek = null;
 		try {
-			roboto = new Font(Font.createFont(Font.TRUETYPE_FONT, new File("weblysleek.ttf")).getFontName(), Font.BOLD,
+			weblysleek = new Font(Font.createFont(Font.TRUETYPE_FONT, new File("content/weblysleek.ttf")).getFontName(), Font.BOLD,
 					10);
 		} catch (FontFormatException | IOException e1) {
 			e1.printStackTrace();
 		}
 
-		g2.setFont(roboto);
+		g2.setFont(weblysleek);
 
 		for (int x = 0; x < 15; x++) {
 			for (int y = 0; y < 15; y++) {
@@ -108,7 +108,7 @@ public class GTray extends JPanel {
 					g2.drawString("DOUBLE", y * WIDTH + 1, x * HEIGHT + 30);
 				} else if (x == 7 && y == 7) {
 					try {
-						Image img = ImageIO.read(new File("star.png"));
+						Image img = ImageIO.read(new File("content/star.png"));
 						g2.drawImage(img, WIDTH * 15 / 2 - 15, HEIGHT * 15 / 2 - 15, WIDTH - 10, HEIGHT - 10, this);
 					} catch (IOException e) {
 						e.printStackTrace();

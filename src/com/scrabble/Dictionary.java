@@ -30,7 +30,7 @@ public class Dictionary {
 		    this.dictionary = new ArrayList<>();
 		    try {
 		        // Lecteur du fichier
-		        BufferedReader dicoFile = new BufferedReader(new FileReader("dictionnaire.txt"));
+		        BufferedReader dicoFile = new BufferedReader(new FileReader("content/dictionnaire.txt"));
 
 		        String dicoLine = dicoFile.readLine();
 		        while (dicoLine != null) {

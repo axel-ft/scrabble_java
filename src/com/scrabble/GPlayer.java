@@ -42,32 +42,32 @@ public class GPlayer extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		Font roboto = null;
+		Font weblysleek = null;
 		Font robotoSmall = null;
 		try {
-			roboto = new Font(Font.createFont(Font.TRUETYPE_FONT, new File("weblysleek.ttf")).getFontName(), Font.BOLD,
+			weblysleek = new Font(Font.createFont(Font.TRUETYPE_FONT, new File("content/weblysleek.ttf")).getFontName(), Font.BOLD,
 					35);
-			robotoSmall = roboto.deriveFont((float) 10);
+			robotoSmall = weblysleek.deriveFont((float) 10);
 		} catch (FontFormatException | IOException e1) {
 			e1.printStackTrace();
 		}
 
 		for (int i = 0; i < Player.MAXLETTERS; i++) {
 			if (i % 2 == 0) {
-				g2.setColor(Color.WHITE);
+				g2.setColor(new Color(204, 205, 169));
 				g2.fillRect(i * 25 + 8, 10,40,40);
 				g2.setColor(Color.black);
-				g2.drawRect(i * 25 + 8, 10,40,40);
-				g2.setFont(roboto);
+				g2.drawRoundRect(i * 25 + 8, 10, 40, 40, 5, 5);
+				g2.setFont(weblysleek);
 				g2.drawString(playerTargeted.getSpecificTile(i).getAlpha(), i * 25 + 15, 40);
 				g2.setFont(robotoSmall);
 				g2.drawString(String.valueOf(playerTargeted.getSpecificTile(i).getPoint()), i * 25 + 36, 48);
 			} else {
-				g2.setColor(Color.WHITE);
+				g2.setColor(new Color(204, 205, 169));
 				g2.fillRect(i * 25 + 8, 70,40,40);
 				g2.setColor(Color.black);
-				g2.drawRect(i * 25 + 8, 70,40,40);
-				g2.setFont(roboto);
+				g2.drawRoundRect(i * 25 + 8, 70, 40, 40, 5, 5);
+				g2.setFont(weblysleek);
 				g2.drawString(playerTargeted.getSpecificTile(i).getAlpha(), i * 25 + 15, 100);
 				g2.setFont(robotoSmall);
 				g2.drawString(String.valueOf(playerTargeted.getSpecificTile(i).getPoint()), i * 25 + 36, 108);
