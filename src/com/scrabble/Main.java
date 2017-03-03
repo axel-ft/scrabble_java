@@ -13,13 +13,12 @@ public class Main {
 		fenetre.addTray();
 		
 		Draw pioche = new Draw();
-		System.out.println(pioche.remainingTiles());
-		Words word = new Words();
+		//Words word = new Words();
 		Player player1 = new Player();
 		player1.setHand(pioche);
 		fenetre.addHandPlayer(player1);
-		System.out.println(word.mot);
-		System.out.println(word.calScore(pioche));
+		//System.out.println(word.mot);
+		//System.out.println(word.calScore(pioche));
 		
 		fenetre.display();
 	}
