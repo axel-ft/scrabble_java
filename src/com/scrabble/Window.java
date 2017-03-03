@@ -7,7 +7,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -16,7 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Window extends JFrame implements ActionListener{
+public class Window extends JFrame {
 
 	/**
 	 * 
@@ -45,6 +44,12 @@ public class Window extends JFrame implements ActionListener{
 		JPanel menu = new JPanel();
 		menu.setBackground(Color.LIGHT_GRAY);
 		JButton newGame = new JButton("Nouvelle partie");
+		newGame.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//TODO
+			}
+		});
 		c.weightx = 0.2;
 		c.weighty = 0;
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -64,13 +69,25 @@ public class Window extends JFrame implements ActionListener{
 		leftBar.setBackground(Color.LIGHT_GRAY);
 		JButton pick = new JButton("Changer mes lettres");
 		pick.setAlignmentX(CENTER_ALIGNMENT);
-		pick.addActionListener(this);
+		pick.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Letter uneLettre = pioche.drawTile();
+				System.out.println(uneLettre.info());
+			}
+		});
 		leftBar.add(pick);
 		
 		leftBar.add(Box.createRigidArea(new Dimension(0, 10)));
 
 		JButton validate = new JButton("Valider");
 		validate.setAlignmentX(CENTER_ALIGNMENT);
+		validate.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//TODO
+			}
+		});
 		leftBar.add(validate);
 		
 		c.weightx = 0.1;
@@ -95,12 +112,6 @@ public class Window extends JFrame implements ActionListener{
 		c.gridy = 2;
 		c.gridwidth = 1;
 		getContentPane().add(gplayer, c);
-	}
-
-	public void actionPerformed(ActionEvent e){
-		
-		Letter uneLettre = pioche.drawTile();
-		System.out.println(uneLettre.info());
 	}
 
 	public void addTray() {

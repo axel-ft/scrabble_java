@@ -11,7 +11,7 @@ public class Player {
 	private String name;
 	private int score;
 	private Letter[] tileSet = new Letter[MAXLETTERS];
-	private Date timeByRound ;
+	private Date timeByRound;
 	private Date remainingTime;
 	
 	public Player (){
@@ -44,7 +44,7 @@ public class Player {
 	 * @param i The index of the targeted letter in the player set
 	 * @return
 	 */
-	public Letter getSpecificTile(int i) {
+	public Letter getPlayerSpecificTile(int i) {
 		if (i < MAXLETTERS) {
 			return this.tileSet[i];
 		} else {

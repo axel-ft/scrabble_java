@@ -1,6 +1,5 @@
 package com.scrabble;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -14,9 +13,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -65,9 +61,8 @@ public class GTray extends JPanel {
 		for (int i = 0; i < ELEMENTS * ELEMENTS; i++) {
 			int x = i / ELEMENTS;
 			int y = i % ELEMENTS;
-			GSquare gSquare = new GSquare(x, y, tray);
-			squares[x][y] = gSquare;
-			this.add(gSquare);
+			squares[x][y] = new GSquare(x, y, tray);
+			this.add(squares[x][y]);
 		}
 	}
 
