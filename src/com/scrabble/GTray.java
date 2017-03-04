@@ -139,7 +139,7 @@ public class GTray extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setColor(Color.black);
-		g2.drawRect(0, 0, PREF_W + 2, PREF_H + 2);;
+		g2.drawRect(0, 0, PREF_W + 2, PREF_H + 2);
 	}
 
 	/**
@@ -200,9 +200,8 @@ public class GTray extends JPanel {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					GSquare gb = GTray.this.getGSquare(GSquare.this.x, GSquare.this.y);
-					System.out
-							.println("r" + GSquare.this.x + ",c" + GSquare.this.y + " " + (GSquare.this == gb) + " " + (GSquare.this.equals(gb)));
+					if (tray.getSpecificSquare(GSquare.this.x, GSquare.this.y).getSquareContent() != '\u0000')
+					System.out.println(tray.getSpecificSquare(GSquare.this.x, GSquare.this.y).getSquareContent());
 				}
 
 				@Override

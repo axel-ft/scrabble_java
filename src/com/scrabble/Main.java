@@ -16,7 +16,9 @@ public class Main {
 		//Words word = new Words();
 		Player player1 = new Player();
 		player1.setHand(pioche);
-		fenetre.addHandPlayer(player1);
+		fenetre.setPlayingNow(player1);
+		fenetre.addPlayerInfo();
+		fenetre.addHandPlayer();
 		//System.out.println(word.mot);
 		//System.out.println(word.calScore(pioche));
 		

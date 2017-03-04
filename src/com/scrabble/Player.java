@@ -28,8 +28,8 @@ public class Player {
 	public void setName(String name){
 		this.name=name;
 	}
-	public void getPlayerName(){
-		System.out.println("Votre pseudo est " + this.name);
+	public String getPlayerName(){
+		return this.name;
 	}
 	
 	public void getHand(){

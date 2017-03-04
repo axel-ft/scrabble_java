@@ -1,8 +1,12 @@
 package com.scrabble;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GridLayout;
+import java.io.File;
+import java.io.IOException;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class GPlayer extends JPanel {
@@ -10,27 +14,45 @@ public class GPlayer extends JPanel {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5779496330520012975L;
-	private static final int PREF_W = 220;
-	private static final int PREF_H = 400;
-	private Player playerTargeted;
-	private GLetter[] gTiles = new GLetter[7];
+	private static final long serialVersionUID = 5236598157451041948L;
+	
+	private static final JLabel votreTour = new JLabel("A vous de jouer");
+	
+	private Font weblysleek = null;
+	private JLabel nameLabel = new JLabel();
+	private JLabel timer = new JLabel();
 
-	public GPlayer(Player playerTargeted) {
-		this.setLayout(new FlowLayout());
-		this.playerTargeted = playerTargeted;
+	public GPlayer(Player playing) {
+		this.loadFont();
+		this.setBackground(null);
+		this.setLayout(new GridLayout(3, 1));
 		
-		for (int i = 0; i < gTiles.length; i++) {
-			gTiles[i] = new GLetter(this.playerTargeted.getPlayerSpecificTile(i));
-			this.add(gTiles[i]);
-		}
-	}
+		votreTour.setFont(weblysleek.deriveFont(20f));
+		votreTour.setHorizontalAlignment(JLabel.CENTER);
+		votreTour.setVerticalAlignment(JLabel.CENTER);
+		this.add(votreTour);
+		
+		this.nameLabel.setFont(weblysleek);
+		this.nameLabel.setText(playing.getPlayerName());
+		this.nameLabel.setHorizontalAlignment(JLabel.CENTER);
+		this.nameLabel.setVerticalAlignment(JLabel.CENTER);
 
-	/**
-	 * @see javax.swing.JComponent#getPreferredSize()
-	 */
-	@Override
-	public Dimension getPreferredSize() {
-		return new Dimension(PREF_W, PREF_H);
+		this.add(nameLabel);
+		
+		this.timer.setFont(weblysleek);
+		this.timer.setText("timer");
+		this.timer.setHorizontalAlignment(JLabel.CENTER);
+		this.timer.setVerticalAlignment(JLabel.CENTER);
+		this.add(timer);
+	}
+	
+	protected void loadFont () {
+		try {
+			weblysleek = new Font(
+					Font.createFont(Font.TRUETYPE_FONT, new File("content/weblysleek.ttf")).getFontName(),
+					Font.BOLD, 30);
+		} catch (FontFormatException | IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 }

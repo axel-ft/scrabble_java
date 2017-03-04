@@ -47,7 +47,7 @@ public class GLetter extends JPanel {
 	 */
 	public GLetter(Letter letter) {
 		this.setBackground(null);
-		this.letter = letter;
+		this.letter = letter;	
 
 		this.addMouseListener(new MouseListener() {
 

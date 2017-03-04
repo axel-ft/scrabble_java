@@ -24,7 +24,13 @@ public class Window extends JFrame {
 	private static final int WIDTH = 1000;
 	private static final int HEIGHT = 700;
 	
+	private JPanel content = new JPanel();
+	private JPanel menu = new JPanel();
+	private GHand gHand;
+	
 	Draw pioche = new Draw();
+	private Player playingNow;
+	private GPlayer gPlayer;
 
 	public Window() {
 		super("Scrabble");
@@ -33,16 +39,14 @@ public class Window extends JFrame {
 		this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JPanel content = new JPanel();
-		content.setLayout(new GridBagLayout());
-		content.setBackground(Color.LIGHT_GRAY);
-		this.setContentPane(content);
+		this.content.setLayout(new GridBagLayout());
+		this.content.setBackground(Color.LIGHT_GRAY);
+		this.setContentPane(this.content);
 	}
 
 	public void addMenu() {
 		GridBagConstraints c = new GridBagConstraints();
-		JPanel menu = new JPanel();
-		menu.setBackground(Color.LIGHT_GRAY);
+		this.menu.setBackground(Color.LIGHT_GRAY);
 		JButton newGame = new JButton("Nouvelle partie");
 		newGame.addActionListener(new ActionListener() {
 			@Override
@@ -58,8 +62,8 @@ public class Window extends JFrame {
 		c.gridy = 0;
 		c.gridwidth = 3;
 		c.insets = new Insets(0, 0, 10, 0);
-		menu.add(newGame);
-		getContentPane().add(menu, c);
+		this.menu.add(newGame);
+		getContentPane().add(this.menu, c);
 	}
 
 	public void addGameButtons() {
@@ -91,27 +95,45 @@ public class Window extends JFrame {
 		leftBar.add(validate);
 		
 		c.weightx = 0.1;
-		c.weighty = 0.5;
-		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weighty = 0.333;
+		c.fill = GridBagConstraints.CENTER;
 		c.anchor = GridBagConstraints.CENTER;
 		c.gridx = 0;
-		c.gridy = 1;
+		c.gridy = 2;
 		getContentPane().add(leftBar, c);
 	}
 	
-	public void addHandPlayer(Player player) {
+	public void setPlayingNow(Player playingNow) {
+		this.playingNow = playingNow;
+		this.gHand = new GHand(this.playingNow);
+		this.gPlayer = new GPlayer(this.playingNow);
+	}
+	
+	public void addPlayerInfo() {
 		GridBagConstraints c = new GridBagConstraints();
-		GPlayer gplayer = new GPlayer(player);
-		gplayer.setBackground(Color.LIGHT_GRAY);
 		c.weightx = 0.2;
-		c.weighty = 0.5;
+		c.weighty = 0.333;
 		c.fill = GridBagConstraints.CENTER;
 		c.anchor = GridBagConstraints.CENTER;
 		c.gridx = 0;
 		c.gridheight = 1;
-		c.gridy = 2;
+		c.gridy = 1;
 		c.gridwidth = 1;
-		getContentPane().add(gplayer, c);
+		getContentPane().add(this.gPlayer, c);
+	}
+	
+	public void addHandPlayer() {
+		GridBagConstraints c = new GridBagConstraints();
+		gHand.setBackground(Color.LIGHT_GRAY);
+		c.weightx = 0.2;
+		c.weighty = 0.333;
+		c.fill = GridBagConstraints.CENTER;
+		c.anchor = GridBagConstraints.CENTER;
+		c.gridx = 0;
+		c.gridheight = 1;
+		c.gridy = 3;
+		c.gridwidth = 1;
+		getContentPane().add(gHand, c);
 	}
 
 	public void addTray() {
@@ -123,7 +145,7 @@ public class Window extends JFrame {
 		c.fill = GridBagConstraints.CENTER;
 		c.anchor = GridBagConstraints.CENTER;
 		c.gridx = 1;
-		c.gridheight = 2;
+		c.gridheight = 3;
 		c.gridy = 1;
 		c.gridwidth = 1;
 		getContentPane().add(squares, c);
