@@ -9,12 +9,17 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.TransferHandler;
 import javax.swing.border.LineBorder;
 
 /**
@@ -32,7 +37,7 @@ public class GTray extends JPanel {
 	private static final int ELEMENTS = 15;
 
 	/**  WIDTH of a square. */
-	private static final int WIDTH = 40;
+	private static final int WIDTH = 46;
 
 	/**  HEIGHT of a square. */
 	private static final int HEIGHT = WIDTH;
@@ -181,6 +186,7 @@ public class GTray extends JPanel {
 			this.y = y;
 			this.setBackground(tray.getSpecificSquare(x, y).getColor());
 			this.setBorder(new LineBorder(Color.black, 1));
+			this.setLayout(new GridLayout(1,1));
 
 			this.addMouseListener(new MouseListener() {
 
@@ -190,26 +196,63 @@ public class GTray extends JPanel {
 
 				@Override
 				public void mousePressed(MouseEvent e) {
-					GSquare.this.setBackground(Color.cyan);
-				}
-
-				@Override
-				public void mouseReleased(MouseEvent e) {
-					GSquare.this.setBackground(tray.getSpecificSquare(x, y).getColor());
-				}
-
-				@Override
-				public void mouseEntered(MouseEvent e) {
+					System.out.println("test");
 					if (tray.getSpecificSquare(GSquare.this.x, GSquare.this.y).getSquareContent() != '\u0000')
 					System.out.println(tray.getSpecificSquare(GSquare.this.x, GSquare.this.y).getSquareContent());
 				}
 
 				@Override
+				public void mouseReleased(MouseEvent e) {
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+				}
+
+				@Override
 				public void mouseExited(MouseEvent e) {
-					GSquare.this.setBackground(tray.getSpecificSquare(x, y).getColor());
 				}
 			});
 
+			TransferHandler dnd = new TransferHandler() {
+	            /**
+				 * 
+				 */
+				private static final long serialVersionUID = 4917754222628905865L;
+
+				@Override
+	            public boolean canImport(TransferSupport support) {
+	                if (!support.isDrop()) {
+	                    return false;
+	                }
+	                //only Strings
+	                if (!support.isDataFlavorSupported(new DataFlavor(GLetter.class, "GLetter"))) {
+	                    return false;
+	                }
+	                return true;
+	            }
+
+	            @Override
+	            public boolean importData(TransferSupport support) {
+	                if (!canImport(support)) {
+	                    return false;
+	                }
+
+	                Transferable tansferable = support.getTransferable();
+	                GLetter gletter;
+	                try {
+	                    gletter = (GLetter) tansferable.getTransferData(new DataFlavor(GLetter.class, "GLetter"));
+	                } catch (Exception e) {
+	                    e.printStackTrace();
+	                    return false;
+	                }
+	                GSquare.this.add(gletter);
+	                return true;
+	            }
+	        };
+
+	        this.setTransferHandler(dnd);
+	        new MyDropTargetListener(this);
 		}
 
 		/**
@@ -247,27 +290,26 @@ public class GTray extends JPanel {
 			g2.setColor(Color.black);
 
 			if (this.getBackground().equals(Tray.TW)) {
-				g2.drawString("MOT", 9, 18);
-				g2.drawString("TRIPLE", 4, 30);
+				g2.drawString("MOT", 12, 21);
+				g2.drawString("TRIPLE", 7, 33);
 			} else if (this.getBackground().equals(Tray.DW) && (this.y != 7 && this.x != 7)) {
-				g2.drawString("MOT", 9, 18);
-				g2.drawString("DOUBLE", 1, 30);
+				g2.drawString("MOT", 12, 21);
+				g2.drawString("DOUBLE", 4, 33);
 			} else if (this.getBackground().equals(Tray.TL)) {
-				g2.drawString("LETTRE", 3, 18);
-				g2.drawString("TRIPLE", 4, 30);
+				g2.drawString("LETTRE", 6, 21);
+				g2.drawString("TRIPLE", 7, 33);
 			} else if (this.getBackground().equals(Tray.DL)) {
-				g2.drawString("LETTRE", 3, 18);
-				g2.drawString("DOUBLE", 1, 30);
+				g2.drawString("LETTRE", 6, 21);
+				g2.drawString("DOUBLE", 4, 33);
 			} else if (this.x == 7 && this.y == 7) {
 				try {
 					Image img = ImageIO.read(new File("content/star.png"));
-					g2.drawImage(img, 3, 3, 34, 34, this);
+					g2.drawImage(img, 6, 6, 34, 34, this);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
 			}
 		}
-
 	}
 }

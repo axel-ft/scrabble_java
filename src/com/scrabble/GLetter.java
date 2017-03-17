@@ -7,6 +7,8 @@ import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragSource;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -30,7 +32,7 @@ public class GLetter extends JPanel {
 	 */
 	@Override
 	public Dimension getPreferredSize() {
-		return new Dimension(GTray.getWIDTH() + 1, GTray.getHEIGHT() + 1);
+		return new Dimension(GTray.getWIDTH() - 4, GTray.getHEIGHT() - 4);
 	}
 
 	/**
@@ -73,6 +75,13 @@ public class GLetter extends JPanel {
 			}
 		});
 
+		MyDragGestureListener dlistener = new MyDragGestureListener();
+        DragSource ds = new DragSource();
+        ds.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, dlistener);
+	}
+	
+	public Letter getLetter() {
+		return this.letter;
 	}
 
 	/**
@@ -99,7 +108,7 @@ public class GLetter extends JPanel {
 				g2.setFont(weblysleek);
 				g2.drawString(this.letter.getAlpha(), 5, 30);
 				g2.setFont(weblysleekSmall);
-				g2.drawString(String.valueOf(this.letter.getPoint()), 30, 38);
+				g2.drawString(String.valueOf(this.letter.getPoint()), 27, 38);
 	}
 
 }

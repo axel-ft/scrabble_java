@@ -21,8 +21,8 @@ public class Window extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -3015881863463738361L;
-	private static final int WIDTH = 1000;
-	private static final int HEIGHT = 700;
+	private static final int WIDTH = 1200;
+	private static final int HEIGHT = 800;
 	
 	private JPanel content = new JPanel();
 	private JPanel menu = new JPanel();

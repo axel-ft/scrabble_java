@@ -1,6 +1,12 @@
 package com.scrabble;
 
-public class Letter {
+import java.io.Serializable;
+
+public class Letter implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2428140169992149810L;
 	private String alpha;
 	private int point;
 	private int qtyInDraw;
