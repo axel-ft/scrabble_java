@@ -29,11 +29,10 @@ public class MyDropTargetListener extends DropTargetAdapter {
             Point dropPoint = ca.getMousePosition();
             Transferable tr = event.getTransferable();
 
-            if (event.isDataFlavorSupported(new DataFlavor(GLetter.class, "GLetter"))) {
-                GLetter gletter = (GLetter) tr.getTransferData(new DataFlavor(GLetter.class, "GLetter"));
+            if (event.isDataFlavorSupported(new DataFlavor(Letter.class, "Letter"))) {
+                Letter gletter = (Letter) tr.getTransferData(new DataFlavor(Letter.class, "Letter"));
 
-                if (gletter != null) {
-
+                if (gletter != null  ) {
                     p.add(gletter);
                     p.revalidate();
                     p.repaint();

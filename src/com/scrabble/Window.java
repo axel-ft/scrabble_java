@@ -26,11 +26,9 @@ public class Window extends JFrame {
 	
 	private JPanel content = new JPanel();
 	private JPanel menu = new JPanel();
-	private GHand gHand;
 	
 	Draw pioche = new Draw();
 	private Player playingNow;
-	private GPlayer gPlayer;
 
 	public Window() {
 		super("Scrabble");
@@ -105,8 +103,6 @@ public class Window extends JFrame {
 	
 	public void setPlayingNow(Player playingNow) {
 		this.playingNow = playingNow;
-		this.gHand = new GHand(this.playingNow);
-		this.gPlayer = new GPlayer(this.playingNow);
 	}
 	
 	public void addPlayerInfo() {
@@ -119,12 +115,11 @@ public class Window extends JFrame {
 		c.gridheight = 1;
 		c.gridy = 1;
 		c.gridwidth = 1;
-		getContentPane().add(this.gPlayer, c);
+		getContentPane().add(this.playingNow, c);
 	}
 	
 	public void addHandPlayer() {
 		GridBagConstraints c = new GridBagConstraints();
-		gHand.setBackground(Color.LIGHT_GRAY);
 		c.weightx = 0.2;
 		c.weighty = 0.333;
 		c.fill = GridBagConstraints.CENTER;
@@ -133,13 +128,12 @@ public class Window extends JFrame {
 		c.gridheight = 1;
 		c.gridy = 3;
 		c.gridwidth = 1;
-		getContentPane().add(gHand, c);
+		getContentPane().add(playingNow.getHand(), c);
 	}
 
 	public void addTray() {
 		GridBagConstraints c = new GridBagConstraints();
 		Tray tray = new Tray();
-		GTray squares = new GTray(tray);
 		c.weightx = 0.8;
 		c.weighty = 0.5;
 		c.fill = GridBagConstraints.CENTER;
@@ -148,7 +142,7 @@ public class Window extends JFrame {
 		c.gridheight = 3;
 		c.gridy = 1;
 		c.gridwidth = 1;
-		getContentPane().add(squares, c);
+		getContentPane().add(tray, c);
 	}
 
 	public void display() {

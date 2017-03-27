@@ -11,12 +11,12 @@ public class MyDragGestureListener implements DragGestureListener {
 
     @Override
     public void dragGestureRecognized(DragGestureEvent event) {
-        GLetter gletter = (GLetter) event.getComponent();
+        Letter letter = (Letter) event.getComponent();
 
         Transferable transferable = new Transferable() {
             @Override
             public DataFlavor[] getTransferDataFlavors() {
-                return new DataFlavor[]{new DataFlavor(GLetter.class, "GLetter")};
+                return new DataFlavor[]{new DataFlavor(Letter.class, "Letter")};
             }
 
             @Override
@@ -29,7 +29,7 @@ public class MyDragGestureListener implements DragGestureListener {
 
             @Override
             public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
-                return gletter;
+                return letter;
             }
         };
         event.startDrag(null, transferable);
