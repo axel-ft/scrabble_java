@@ -21,19 +21,19 @@ public class Words {
 	}
 
 	/**
-	 * @author Valentin, Calcul du score avec l'aide de 2 autres méthodes dans
+	 * @author Valentin, Calcul du score avec l'aide de 2 autres mÃ©thodes dans
 	 *         Draw returnCaseIndice() & returnPoint();
 	 * @return
 	 *
 	 * 		Fonctionnement:
 	 *
-	 *         Le mot saisi par l'utilisateur est scindé en tableau est
-	 *         récupéré. Une boucle for permet de réaliser l'action de comptage
-	 *         de points pour chaque lettre du mot posé. la lettre récupérée va
-	 *         être comparée dans le tableau alphabétique (Draw.java) et
-	 *         ressortira le numéro de case du tableau contenant la lettre. Puis
-	 *         avec le numéro de case, on cherche le nombre de points
-	 *         correspondant à la lettre. On retourne la valeur et on incrémente
+	 *         Le mot saisi par l'utilisateur est scindÃ© en tableau est
+	 *         rÃ©cupÃ©rÃ©. Une boucle for permet de rÃ©aliser l'action de comptage
+	 *         de points pour chaque lettre du mot posÃ©. la lettre rÃ©cupÃ©rÃ©e va
+	 *         Ãªtre comparÃ©e dans le tableau alphabÃ©tique (Draw.java) et
+	 *         ressortira le numÃ©ro de case du tableau contenant la lettre. Puis
+	 *         avec le numÃ©ro de case, on cherche le nombre de points
+	 *         correspondant Ã  la lettre. On retourne la valeur et on incrÃ©mente
 	 *         cette valeur dans la variable score. On recommence pour la lettre
 	 *         suivante du mot.
 	 */

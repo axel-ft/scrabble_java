@@ -9,8 +9,6 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.RenderingHints;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -18,7 +16,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-import javax.swing.TransferHandler;
 import javax.swing.border.LineBorder;
 
 /**
@@ -62,7 +59,7 @@ public class Square extends JPanel {
 	 *            And set the 'content' variable as null
 	 *            </p>
 	 */
-	public Square(int wordMultiplier, int letterMultiplier, Color color, int x, int y) {
+	public Square(int wordMultiplier, int letterMultiplier, Color color, int x, int y, Window window) {
 
 		this.wordMultiplier = wordMultiplier;
 		this.letterMultiplier = letterMultiplier;
@@ -102,44 +99,7 @@ public class Square extends JPanel {
 			}
 		});
 
-		TransferHandler dnd = new TransferHandler() {
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 4917754222628905865L;
-
-			@Override
-            public boolean canImport(TransferSupport support) {
-                if (!support.isDrop()) {
-                    return false;
-                }
-                if (!support.isDataFlavorSupported(new DataFlavor(Letter.class, "Letter"))) {
-                    return false;
-                }
-                return true;
-            }
-
-            @Override
-            public boolean importData(TransferSupport support) {
-                if (!canImport(support)) {
-                    return false;
-                }
-
-                Transferable tansferable = support.getTransferable();
-                Letter letter;
-                try {
-                    letter = (Letter) tansferable.getTransferData(new DataFlavor(Letter.class, "Letter"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return false;
-                }
-                Square.this.add(letter);
-                return true;
-            }
-        };
-
-        this.setTransferHandler(dnd);
-        new MyDropTargetListener(this);
+        new MyDropTargetListener(this, window);
 	}
 
 	/**
@@ -261,7 +221,6 @@ public class Square extends JPanel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
 		}
 	}
 }

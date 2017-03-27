@@ -1,7 +1,7 @@
 package com.scrabble;
 
 
-// création d un  timer pour chaque tour de jeu 
+// crÃ©ation d un  timer pour chaque tour de jeu 
 public class Timer{
      
     public static void main(String [] args){

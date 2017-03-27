@@ -102,6 +102,26 @@ public class Player extends JPanel {
 		}
 	}
 	
+	public int getIndex(Letter letter) {
+		int index = -1;
+		for (int i=0; i<MAXLETTERS; i++) {
+			if (this.tileSet[i] != null && letter.getAlpha().equals(this.tileSet[i].getAlpha()))  {
+				index = i;
+				return index;
+			}
+		}
+		return index;
+	}
+	
+	public void removeSpecificTile(int i) {
+		if (i<MAXLETTERS && i != -1 && this.tileSet[i] != null) {
+			this.tileSet[i] = null;
+			this.updateHand();
+		} else {
+			return;
+		}
+	}
+	
 	public void setHand(Draw draw) {
 		for (int i = 0; i < MAXLETTERS; i++) {
 			if(tileSet[i] == null && draw.remainingTiles() > 0) {
@@ -127,20 +147,6 @@ public class Player extends JPanel {
 		private static final long serialVersionUID = 5779496330520012975L;
 		private static final int PREF_W = 220;
 		private static final int PREF_H = 400;
-
-		/**
-		 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-		 */
-		@Override
-		protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			this.setLayout(new FlowLayout());
-			this.setBackground(Color.LIGHT_GRAY);
-				
-			for (int i = 0; i < Player.this.tileSet.length; i++) {
-				this.add(Player.this.tileSet[i]);
-			}
-		}
 		
 		/**
 		 * @see javax.swing.JComponent#getPreferredSize()
@@ -153,5 +159,18 @@ public class Player extends JPanel {
 	
 	public JPanel getHand () {
 		return this.Hand;
+	}
+	
+	public void updateHand() {
+		this.Hand.removeAll();
+		this.Hand.setLayout(new FlowLayout());
+		this.Hand.setBackground(Color.LIGHT_GRAY);
+			
+		for (int i = 0; i < Player.this.tileSet.length; i++) {
+			if (this.tileSet[i] != null) this.Hand.add(this.tileSet[i]);
+		}
+		
+		this.Hand.repaint();
+		this.Hand.revalidate();
 	}
 }

@@ -10,15 +10,16 @@ public class Main {
 		Window fenetre = new Window();
 		fenetre.addMenu();
 		fenetre.addGameButtons();
+		Player player1 = new Player();
+		fenetre.setPlayingNow(player1);
 		fenetre.addTray();
 		
 		Draw pioche = new Draw();
 		//Words word = new Words();
-		Player player1 = new Player();
 		player1.setHand(pioche);
-		fenetre.setPlayingNow(player1);
 		fenetre.addPlayerInfo();
 		fenetre.addHandPlayer();
+		player1.updateHand();
 		//System.out.println(word.mot);
 		//System.out.println(word.calScore(pioche));
 		

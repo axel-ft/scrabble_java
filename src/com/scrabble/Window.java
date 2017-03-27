@@ -105,6 +105,10 @@ public class Window extends JFrame {
 		this.playingNow = playingNow;
 	}
 	
+	public Player getPlayingNow() {
+		return this.playingNow;
+	}
+	
 	public void addPlayerInfo() {
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 0.2;
@@ -128,12 +132,13 @@ public class Window extends JFrame {
 		c.gridheight = 1;
 		c.gridy = 3;
 		c.gridwidth = 1;
+		playingNow.displayHand();
 		getContentPane().add(playingNow.getHand(), c);
 	}
 
 	public void addTray() {
 		GridBagConstraints c = new GridBagConstraints();
-		Tray tray = new Tray();
+		Tray tray = new Tray(this);
 		c.weightx = 0.8;
 		c.weighty = 0.5;
 		c.fill = GridBagConstraints.CENTER;
