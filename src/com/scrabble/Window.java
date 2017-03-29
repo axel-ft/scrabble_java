@@ -31,17 +31,18 @@ public class Window extends JFrame {
 	private static final long serialVersionUID = -3015881863463738361L;
 	private static final int WIDTH = 1200;
 	private static final int HEIGHT = 1000;
-	
+
 	private JPanel content = new JPanel();
 	private JPanel menu = new JPanel();
 	private JPanel turnInfo = new JPanel();
 	private JPanel leftBar = new JPanel();
-	
+
 	private Draw pioche = new Draw();
 	private Tray tray = new Tray();
 	private Word word;
-	private Player playingNow;
-	
+	private Player[] players = new Player[] { new Player(), null, null, null };
+	private int playingNow = -1;
+
 	private Font weblysleek = null;
 	private JLabel remainingLetters = new JLabel("Lettres restantes : " + pioche.remainingTiles());
 	private int lastPoints = -1;
@@ -58,12 +59,12 @@ public class Window extends JFrame {
 		this.content.setBackground(Color.LIGHT_GRAY);
 		this.setContentPane(this.content);
 		this.loadFont();
+		this.setPlayingNow();
 	}
-	
-	protected void loadFont () {
+
+	protected void loadFont() {
 		try {
-			weblysleek = new Font(
-					Font.createFont(Font.TRUETYPE_FONT, new File("content/weblysleek.ttf")).getFontName(),
+			weblysleek = new Font(Font.createFont(Font.TRUETYPE_FONT, new File("content/weblysleek.ttf")).getFontName(),
 					Font.BOLD, 20);
 		} catch (FontFormatException | IOException e1) {
 			e1.printStackTrace();
@@ -73,15 +74,21 @@ public class Window extends JFrame {
 	public Draw getDraw() {
 		return this.pioche;
 	}
-	
+
 	public void addMenu() {
+		this.menu.removeAll();
 		GridBagConstraints c = new GridBagConstraints();
 		this.menu.setBackground(Color.LIGHT_GRAY);
-		JButton newGame = new JButton("Nouvelle partie");
+		JButton newGame = new JButton("Ajouter un joueur");
 		newGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO
+				for (int i = 0; i < players.length; i++) {
+					if (players[i] == null) {
+						players[i] = new Player();
+						break;
+					}
+				}
 			}
 		});
 		c.weightx = 0.2;
@@ -97,6 +104,7 @@ public class Window extends JFrame {
 	}
 
 	public void addGameButtons() {
+		leftBar.removeAll();
 		GridBagConstraints c = new GridBagConstraints();
 		leftBar.setLayout(new BoxLayout(leftBar, BoxLayout.Y_AXIS));
 		leftBar.setBackground(Color.LIGHT_GRAY);
@@ -105,12 +113,16 @@ public class Window extends JFrame {
 		pick.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (tray.isOneSquarePending() != null) return;
-				if (!tray.isWordInProgress()) playingNow.changeLetters(pioche);
+				if (tray.isOneSquarePending() != null)
+					return;
+				if (!tray.isWordInProgress()) {
+					players[playingNow].changeLetters(pioche);
+					Window.this.setPlayingNow();
+				}
 			}
 		});
 		leftBar.add(pick);
-		
+
 		leftBar.add(Box.createRigidArea(new Dimension(0, 20)));
 
 		JButton validate = new JButton("Valider");
@@ -119,25 +131,26 @@ public class Window extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (tray.isWordInProgress() || tray.isLetterValid()) {
-					word = new Word(tray, pioche, playingNow);
+					word = new Word(tray, pioche, players[playingNow]);
 					if (word.scanTray()) {
 						Window.this.lastPoints = word.getWordScore();
 						Window.this.lastWords = word.getWords();
 						tray.wordValidated();
-						playingNow.setHand(pioche);
+						players[playingNow].setHand(pioche);
+						Window.this.setPlayingNow();
 						Window.this.update();
 						return;
 					} else {
-						for (int i=0; i<15; i++) {
-							for (int j=0; j<15; j++) {
+						for (int i = 0; i < 15; i++) {
+							for (int j = 0; j < 15; j++) {
 								if (tray.getSpecificSquare(i, j).getPendingState()) {
-									playingNow.resetTile(tray.getSpecificSquare(i, j).getSquareContent());
+									players[playingNow].resetTile(tray.getSpecificSquare(i, j).getSquareContent());
 									tray.getSpecificSquare(i, j).getSquareContent().resetDrag();
 									tray.getSpecificSquare(i, j).removeAll();
 									tray.getSpecificSquare(i, j).cancelContent();
-								    tray.getSpecificSquare(i, j).revalidate();
-					                tray.getSpecificSquare(i, j).repaint();
-					            }
+									tray.getSpecificSquare(i, j).revalidate();
+									tray.getSpecificSquare(i, j).repaint();
+								}
 							}
 						}
 						tray.wordValidated();
@@ -146,40 +159,40 @@ public class Window extends JFrame {
 						return;
 					}
 				}
-				
+
 			}
 		});
 		leftBar.add(validate);
-		
+
 		leftBar.add(Box.createRigidArea(new Dimension(0, 20)));
-		
+
 		JButton cancel = new JButton("Annuler");
 		cancel.setAlignmentX(CENTER_ALIGNMENT);
 		cancel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (tray.isWordInProgress() || tray.isOneSquarePending() != null) {
-					for (int i=0; i<15; i++) {
-						for (int j=0; j<15; j++) {
+					for (int i = 0; i < 15; i++) {
+						for (int j = 0; j < 15; j++) {
 							if (tray.getSpecificSquare(i, j).getPendingState()) {
-								playingNow.resetTile(tray.getSpecificSquare(i, j).getSquareContent());
+								players[playingNow].resetTile(tray.getSpecificSquare(i, j).getSquareContent());
 								tray.getSpecificSquare(i, j).getSquareContent().resetDrag();
 								tray.getSpecificSquare(i, j).removeAll();
 								tray.getSpecificSquare(i, j).cancelContent();
-							    tray.getSpecificSquare(i, j).revalidate();
-				                tray.getSpecificSquare(i, j).repaint();
-				            }
+								tray.getSpecificSquare(i, j).revalidate();
+								tray.getSpecificSquare(i, j).repaint();
+							}
 						}
 					}
 					tray.wordValidated();
 					tray.resetPlacing();
 					Window.this.update();
 				}
-				
+
 			}
 		});
 		leftBar.add(cancel);
-		
+
 		c.weightx = 0.5;
 		c.weighty = 0.5;
 		c.fill = GridBagConstraints.BOTH;
@@ -189,16 +202,22 @@ public class Window extends JFrame {
 		c.insets = new Insets(50, 0, 50, 0);
 		getContentPane().add(leftBar, c);
 	}
-	
-	public void setPlayingNow(Player playingNow) {
-		this.playingNow = playingNow;
-		for (int i=0; i < 15; i++) {
-			for (int j=0; j < 15; j++) {
-				tray.getSpecificSquare(i, j).updatePlayingNowAndTray(playingNow, tray);
+
+	public void setPlayingNow() {
+		playingNow++;
+		while (players[playingNow] == null) {
+			if (playingNow == 3)
+				playingNow = -1;
+			playingNow++;
+		}
+		for (int i = 0; i < 15; i++) {
+			for (int j = 0; j < 15; j++) {
+				tray.getSpecificSquare(i, j).updatePlayingNowAndTray(players[playingNow], tray);
 			}
 		}
+		players[playingNow].setHand(pioche);
 	}
-	
+
 	public void addPlayerInfo() {
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 0.5;
@@ -210,11 +229,10 @@ public class Window extends JFrame {
 		c.gridy = 1;
 		c.gridwidth = 1;
 		c.insets = new Insets(50, 0, 0, 0);
-		getContentPane().add(this.playingNow, c);
+		getContentPane().add(this.players[playingNow], c);
 	}
-	
+
 	public void addHandPlayer() {
-		getContentPane().remove(playingNow.getHand());
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 0.5;
 		c.weighty = 0.5;
@@ -223,12 +241,11 @@ public class Window extends JFrame {
 		c.gridheight = 1;
 		c.gridy = 3;
 		c.gridwidth = 1;
-		getContentPane().add(playingNow.getHand(), c);
+		getContentPane().add(players[playingNow].getHand(), c);
 	}
-	
+
 	public void addTurnInfo() {
 		turnInfo.setBackground(null);
-		getContentPane().remove(turnInfo);
 		turnInfo.removeAll();
 		turnInfo.setLayout(new GridLayout(4, 1));
 		remainingLetters = new JLabel("Lettres restantes : " + pioche.remainingTiles());
@@ -251,7 +268,7 @@ public class Window extends JFrame {
 			last.setHorizontalAlignment(JLabel.CENTER);
 			last.setVerticalAlignment(JLabel.CENTER);
 			turnInfo.add(last);
-			for (String word: lastWords) {
+			for (String word : lastWords) {
 				JLabel wordLabel = new JLabel(word);
 				wordLabel.setFont(weblysleek);
 				wordLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -283,10 +300,15 @@ public class Window extends JFrame {
 		pack();
 		this.setVisible(true);
 	}
-	
+
 	public void update() {
-		this.addTurnInfo();
+		getContentPane().removeAll();
+		this.addMenu();
+		this.addGameButtons();
+		this.addTray();
+		this.addPlayerInfo();
 		this.addHandPlayer();
+		this.addTurnInfo();
 		this.repaint();
 		this.revalidate();
 	}

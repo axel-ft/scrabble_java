@@ -9,16 +9,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Window fenetre = new Window();
-		fenetre.addMenu();
-		fenetre.addGameButtons();
-		fenetre.addTray();
-		
-		Player player1 = new Player();
-		fenetre.setPlayingNow(player1);
-		player1.setHand(fenetre.getDraw());
-		fenetre.addPlayerInfo();
-		fenetre.addHandPlayer();
-		fenetre.addTurnInfo();
+		fenetre.update();
 		
 		fenetre.display();
 	}
