@@ -8,6 +8,7 @@ import java.util.Random;
 
 public class Draw {
 	Letter[] tiles = new Letter[27];
+	int[] probas;
 	private int remainingPawns = 0;
 
 	public Draw() { // Définition de l'alphabet avec c'est points et qte
@@ -38,24 +39,18 @@ public class Draw {
 		this.tiles[24] = new Letter("X", 10, 1);
 		this.tiles[25] = new Letter("Y", 10, 1);
 		this.tiles[26] = new Letter("Z", 10, 1);
-	}
-
-	public void displayTiles() { // Afficher l'alphabet
-		for (int i = 0; i < this.tiles.length; i++) {
-			System.out.printf(this.tiles[i].info());
-			System.out.printf("\r\n");
-		}
-
+		this.probas = new int[]{0,0,1,1,1,1,1,1,1,1,1,2,2,3,3,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,7,7,8,8,9,9,9,9,9,9,9,9,10,11,12,12,12,12,12,13,13,13,14,14,14,14,14,14,15,15,15,15,15,15,16,16,17,18,18,18,18,18,18,19,19,19,19,19,19,20,20,20,20,20,20,21,21,21,21,21,21,22,22,23,24,25,26};
 	}
 
 	public Letter drawTile() { // Pioche aléatoire
 		Random randoml = new Random();
-		int n = randoml.nextInt(27);
-		while (this.tiles[n].getQtyInDraw() <= 0) {
-			n = randoml.nextInt(27);
+		int n = randoml.nextInt(102);
+		while (probas[n] == -1 || this.tiles[probas[n]].getQtyInDraw() <= 0) {
+			n = randoml.nextInt(102);
 		}
-		Letter draw = this.tiles[n];
-		this.tiles[n].decQtyInDraw();
+		Letter draw = this.tiles[probas[n]];
+		this.tiles[probas[n]].decQtyInDraw();
+		probas[n] = -1;
 		return draw;
 	}
 

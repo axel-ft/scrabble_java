@@ -120,11 +120,31 @@ public class Window extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (tray.isWordInProgress() || tray.isLetterValid()) {
 					word = new Word(tray, pioche, playingNow);
-					Window.this.lastPoints = word.getWordScore();
-					Window.this.lastWords = word.getWords();
-					tray.wordValidated();
-					playingNow.setHand(pioche);
-					Window.this.update();
+					if (word.scanTray()) {
+						Window.this.lastPoints = word.getWordScore();
+						Window.this.lastWords = word.getWords();
+						tray.wordValidated();
+						playingNow.setHand(pioche);
+						Window.this.update();
+						return;
+					} else {
+						for (int i=0; i<15; i++) {
+							for (int j=0; j<15; j++) {
+								if (tray.getSpecificSquare(i, j).getPendingState()) {
+									playingNow.resetTile(tray.getSpecificSquare(i, j).getSquareContent());
+									tray.getSpecificSquare(i, j).getSquareContent().resetDrag();
+									tray.getSpecificSquare(i, j).removeAll();
+									tray.getSpecificSquare(i, j).cancelContent();
+								    tray.getSpecificSquare(i, j).revalidate();
+					                tray.getSpecificSquare(i, j).repaint();
+					            }
+							}
+						}
+						tray.wordValidated();
+						tray.resetPlacing();
+						Window.this.update();
+						return;
+					}
 				}
 				
 			}
@@ -138,7 +158,7 @@ public class Window extends JFrame {
 		cancel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (tray.isWordInProgress() || tray.isLetterValid()) {
+				if (tray.isWordInProgress() || tray.isOneSquarePending() != null) {
 					for (int i=0; i<15; i++) {
 						for (int j=0; j<15; j++) {
 							if (tray.getSpecificSquare(i, j).getPendingState()) {
@@ -153,7 +173,7 @@ public class Window extends JFrame {
 					}
 					tray.wordValidated();
 					tray.resetPlacing();
-					Window.this.addHandPlayer();
+					Window.this.update();
 				}
 				
 			}
@@ -266,6 +286,7 @@ public class Window extends JFrame {
 	
 	public void update() {
 		this.addTurnInfo();
+		this.addHandPlayer();
 		this.repaint();
 		this.revalidate();
 	}

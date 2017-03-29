@@ -21,7 +21,6 @@ public class Word {
 		this.tray = tray;
 		this.draw = draw;
 		this.playing = playing;
-		this.scanTray();
 	}
 	
 	public List<String> getWords() {
@@ -48,6 +47,8 @@ public class Word {
 	 *         correspondant à la lettre. On retourne la valeur et on incrémente
 	 *         cette valeur dans la variable score. On recommence pour la lettre
 	 *         suivante du mot.
+	 *         
+	 *  Modification par Axel le 28/03/2017 et 29/03/2017 : réécriture complète
 	 */
 	public String scanHorizontalWord() {
 		this.word = "";
@@ -55,11 +56,9 @@ public class Word {
 		if (tray.getYorigin() != 0 && tray.getSpecificSquare(tray.getXorigin(), tray.getYorigin()-1).getSquareContent() != null) {
 			while(yCursor > 0 && tray.getSpecificSquare(xCursor, yCursor-1).getSquareContent() != null) {
 				yCursor--;
-				System.out.println(tray.getSpecificSquare(xCursor, yCursor).getSquareContent());
 			}
 		}
 		while(yCursor < 15 && tray.getSpecificSquare(xCursor, yCursor).getSquareContent() != null) {
-			System.out.println(String.valueOf(xCursor) + "  " + String.valueOf(yCursor) + " - " + tray.getSpecificSquare(xCursor, yCursor).getSquareContent().getAlpha());
 			this.word += tray.getSpecificSquare(xCursor, yCursor).getSquareContent().getAlpha();
 			this.wordScore += draw.returnCaseIndice(tray.getSpecificSquare(xCursor, yCursor).getSquareContent().getAlpha()).getPoint() * tray.getSpecificSquare(xCursor, yCursor).getLetterMultiplier();
 			this.wordMult *= tray.getSpecificSquare(xCursor, yCursor).getWordMultiplier();
@@ -73,11 +72,9 @@ public class Word {
 		if (tray.getXorigin() != 0 && tray.getSpecificSquare(tray.getXorigin()-1, tray.getYorigin()).getSquareContent() != null) {
 			while(xCursor > 0 && tray.getSpecificSquare(xCursor-1, yCursor).getSquareContent() != null) {
 				xCursor--;
-				System.out.println(tray.getSpecificSquare(xCursor, yCursor).getSquareContent());
 			}
 		}
 		while(xCursor < 15 && tray.getSpecificSquare(xCursor, yCursor).getSquareContent() != null) {
-			System.out.println(String.valueOf(xCursor) + "  " + String.valueOf(yCursor) + " - " + tray.getSpecificSquare(xCursor, yCursor).getSquareContent().getAlpha());
 			this.word += tray.getSpecificSquare(xCursor, yCursor).getSquareContent().getAlpha();
 			this.wordScore += draw.returnCaseIndice(tray.getSpecificSquare(xCursor, yCursor).getSquareContent().getAlpha()).getPoint() * tray.getSpecificSquare(xCursor, yCursor).getLetterMultiplier();
 			this.wordMult *= tray.getSpecificSquare(xCursor, yCursor).getWordMultiplier();
@@ -87,7 +84,7 @@ public class Word {
 		return word;
 	}
 	
-	public void scanTray() {
+	public boolean scanTray() {
 		
 		if (tray.isWordHorizontal()) {
 			word = this.scanHorizontalWord();
@@ -98,15 +95,14 @@ public class Word {
 		}
 		
 		if (word!=null) {
-			System.out.println(word + dico.checkWord(word));
 			if (dico.checkWord(word)) {
 				this.wordScore *= this.wordMult;
 				this.playing.addScore(wordScore);
 				this.words.add(this.word);
-				System.out.println(this.word);
-				System.out.println(wordScore);
+				return true;
 			}
 		}
+		return false;
 		
 	}
 
