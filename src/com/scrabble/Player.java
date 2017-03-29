@@ -62,7 +62,7 @@ public class Player extends JPanel {
 		this.add(nameLabel);
 		
 		this.timer.setFont(weblysleek);
-		this.timer.setText("timer");
+		this.timer.setText("Timer");
 		this.timer.setHorizontalAlignment(JLabel.CENTER);
 		this.timer.setVerticalAlignment(JLabel.CENTER);
 		this.add(timer);
@@ -83,6 +83,10 @@ public class Player extends JPanel {
 	}
 	public String getPlayerName(){
 		return this.name;
+	}
+	
+	public void addScore(int scoreToAdd) {
+		this.score += scoreToAdd;
 	}
 	
 	/**
@@ -111,6 +115,16 @@ public class Player extends JPanel {
 		if (index<MAXLETTERS && index != -1 && this.tileSet[index] != null) {
 			this.tileSet[index] = null;
 			this.updateHand();
+		}
+	}
+	
+	public void resetTile(Letter letter) {
+		for (int i=0; i<MAXLETTERS; i++) {
+			if (this.tileSet[i] == null) {
+				this.tileSet[i] = letter;
+				this.updateHand();
+				return;
+			}
 		}
 	}
 	
@@ -148,8 +162,10 @@ public class Player extends JPanel {
 	
 	public void changeLetters(Draw pioche) {
 		for (int i=0; i<this.tileSet.length; i++) {
-			this.tileSet[i].addQtyInDraw();
-			this.tileSet[i] = null;
+			if (this.tileSet[i] != null) {
+				this.tileSet[i].addQtyInDraw();
+				this.tileSet[i] = null;
+			}
 		}
 		this.setHand(pioche);
 		this.updateHand();

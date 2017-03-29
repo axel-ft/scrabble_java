@@ -45,6 +45,12 @@ public class Letter extends JPanel  implements Serializable{
         DragSource ds = new DragSource();
         ds.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, dlistener);
 	}
+	
+	public void resetDrag() {
+		MyDragGestureListener dlistener = new MyDragGestureListener();
+        DragSource ds = new DragSource();
+        ds.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, dlistener);
+	}
 
 	public void decQtyInDraw() {
 		this.qtyInDraw--;
@@ -65,6 +71,7 @@ public class Letter extends JPanel  implements Serializable{
 	public int getQtyInDraw() {
 		return this.qtyInDraw;
 	}
+	
 	public String info(){
 		return this.alpha + "   "  + this.qtyInDraw + "   " +  this.point;
 	}

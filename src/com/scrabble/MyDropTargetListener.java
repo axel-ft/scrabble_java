@@ -41,7 +41,7 @@ public class MyDropTargetListener extends DropTargetAdapter {
                     	}
                     	
                     	if (this.square.getXSquare() > this.tray.isOneSquarePending().getXSquare()+1 || this.square.getXSquare() < this.tray.isOneSquarePending().getXSquare()) {
-                    		if (this.tray.getSpecificSquare(this.tray.isOneSquarePending().getXSquare()+1, this.tray.isOneSquarePending().getYSquare()).getSquareContent() == "\u0000") {
+                    		if (this.tray.getSpecificSquare(this.tray.isOneSquarePending().getXSquare()+1, this.tray.isOneSquarePending().getYSquare()).getSquareContent() == null) {
                     			this.square.setPendingFalse();
                     			event.rejectDrop();
                     			return;
@@ -49,7 +49,7 @@ public class MyDropTargetListener extends DropTargetAdapter {
                     	}
                     	
                     	if (this.square.getYSquare() > this.tray.isOneSquarePending().getYSquare()+1 || this.square.getYSquare() < this.tray.isOneSquarePending().getYSquare()) {
-                    		if (this.tray.getSpecificSquare(this.tray.isOneSquarePending().getXSquare(), this.tray.isOneSquarePending().getYSquare()+1).getSquareContent() == "\u0000") {
+                    		if (this.tray.getSpecificSquare(this.tray.isOneSquarePending().getXSquare(), this.tray.isOneSquarePending().getYSquare()+1).getSquareContent() == null) {
                     			this.square.setPendingFalse();
                     			event.rejectDrop();
                     			return;
@@ -69,14 +69,14 @@ public class MyDropTargetListener extends DropTargetAdapter {
                     
                     if (this.tray.isWordInProgress()) {
                     	if ((this.tray.isWordHorizontal() && this.square.getYSquare() > this.tray.getYLastPlaced()+1 || this.square.getYSquare() < this.tray.getYLastPlaced())) {
-                    		if (this.tray.getSpecificSquare(this.tray.getXLastPlaced(), this.tray.getYLastPlaced()+1).getSquareContent() == "\u0000") {
+                    		if (this.tray.getSpecificSquare(this.tray.getXLastPlaced(), this.tray.getYLastPlaced()+1).getSquareContent() == null) {
                     			this.square.setPendingFalse();
                     			event.rejectDrop();
                        			return;
                     		}
                 		}
                 		if (this.tray.isWordVertical() && this.square.getXSquare() > this.tray.getXLastPlaced()+1 || this.square.getXSquare() < this.tray.getXLastPlaced()) {
-                			if (this.tray.getSpecificSquare(this.tray.getXLastPlaced()+1, this.tray.getYLastPlaced()).getSquareContent() == "\u0000") {
+                			if (this.tray.getSpecificSquare(this.tray.getXLastPlaced()+1, this.tray.getYLastPlaced()).getSquareContent() == null) {
                 				this.square.setPendingFalse();
                 				event.rejectDrop();
                     			return;
@@ -86,7 +86,7 @@ public class MyDropTargetListener extends DropTargetAdapter {
 
                  
                 	this.square.add(letter);
-                    this.square.setSquareContent(letter.getAlpha());
+                    this.square.setSquareContent(letter);
                     this.tray.setXLastPlaced(this.square.getXSquare());
                     this.tray.setYLastPlaced(this.square.getYSquare());
                     this.square.revalidate();

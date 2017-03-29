@@ -40,7 +40,7 @@ public class Square extends JPanel {
 	
 	private int wordMultiplier;
 	private int letterMultiplier;
-	private String content;
+	private Letter content;
 	private boolean used;
 	private boolean pending = false;
 	private Color color;
@@ -66,7 +66,7 @@ public class Square extends JPanel {
 
 		this.wordMultiplier = wordMultiplier;
 		this.letterMultiplier = letterMultiplier;
-		this.content = "\u0000";
+		this.content = null;
 		this.color = color;
 		
 		this.x = x;
@@ -75,31 +75,6 @@ public class Square extends JPanel {
 		this.setBackground(this.color);
 		this.setBorder(new LineBorder(Color.black, 1));
 		this.setLayout(new GridLayout(1,1));
-		
-		this.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (Square.this.content != "\u0000")
-				System.out.println(Square.this.content);
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-		});
 
         this.mdtl = new MyDropTargetListener(this);
 	}
@@ -110,8 +85,12 @@ public class Square extends JPanel {
 	 * Allow a char content on the selected square
 	 * </p>
 	 */
-	public void setSquareContent(String content) {
+	public void setSquareContent(Letter content) {
 		this.content = content;
+	}
+	
+	public void cancelContent() {
+		this.content = null;
 	}
 	
 	public void setPendingFalse() {
@@ -133,6 +112,14 @@ public class Square extends JPanel {
 	public int getYSquare() {
 		return this.y;
 	}
+	
+	public int getLetterMultiplier() {
+		return this.letterMultiplier;
+	}
+	
+	public int getWordMultiplier() {
+		return this.wordMultiplier;
+	}
 
 	/**
 	 * <h3>Function getSquareContent :</h3>
@@ -142,7 +129,7 @@ public class Square extends JPanel {
 	 * @return the square's content
 	 * </p>
 	 */
-	public String getSquareContent() {
+	public Letter getSquareContent() {
 		return this.content;	
 	}
 	
@@ -168,7 +155,7 @@ public class Square extends JPanel {
 	 * @return
 	 */
 	public boolean isSquareUsed() {
-		if (this.content == "\u0000") {
+		if (this.content == null) {
 			return false;
 		} else {
 			this.used = true;

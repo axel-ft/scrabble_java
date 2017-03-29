@@ -288,10 +288,10 @@ public class Tray extends JPanel{
     	for (int i=0; i<ELEMENTS; i++) {
     		for (int j=0; j<ELEMENTS; j++) {
     			if (this.tray[i][j].getPendingState()) {
-    				if((i<ELEMENTS-1 && this.tray[i+1][j].getSquareContent() != "\u0000") || (i>0 && this.tray[i-1][j].getSquareContent() != "\u0000")) {
+    				if((i<ELEMENTS-1 && this.tray[i+1][j].getSquareContent() != null) || (i>0 && this.tray[i-1][j].getSquareContent() != null)) {
         				return true;
     				}
-    				if((j<ELEMENTS-1 && this.tray[i][j+1].getSquareContent() != "\u0000") || (j>0 && this.tray[i][j-1].getSquareContent() != "\u0000")) {
+    				if((j<ELEMENTS-1 && this.tray[i][j+1].getSquareContent() != null) || (j>0 && this.tray[i][j-1].getSquareContent() != null)) {
         				return true;
     				}
     			}
@@ -349,6 +349,13 @@ public class Tray extends JPanel{
     		}
     	}
     	return false;
+    }
+    
+    public void resetPlacing() {
+    	this.XLastPlaced = -1;
+    	this.YLastPlaced = -1;
+    	this.Xorigin = -1;
+    	this.Yorigin = -1;
     }
     
     public void wordValidated() {
