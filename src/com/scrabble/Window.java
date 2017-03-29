@@ -2,17 +2,22 @@ package com.scrabble;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Window extends JFrame {
@@ -27,8 +32,15 @@ public class Window extends JFrame {
 	private JPanel content = new JPanel();
 	private JPanel menu = new JPanel();
 	
-	Draw pioche = new Draw();
+	private Draw pioche = new Draw();
+	private Tray tray = new Tray();
+	private Word word;
 	private Player playingNow;
+	
+	private Font weblysleek = null;
+	private JLabel remainingLetters = new JLabel("Lettres restantes : " + pioche.remainingTiles());
+	private int lastPoints = -1;
+	private String lastWord = null;
 
 	public Window() {
 		super("Scrabble");
@@ -40,8 +52,23 @@ public class Window extends JFrame {
 		this.content.setLayout(new GridBagLayout());
 		this.content.setBackground(Color.LIGHT_GRAY);
 		this.setContentPane(this.content);
+		this.loadFont();
+	}
+	
+	protected void loadFont () {
+		try {
+			weblysleek = new Font(
+					Font.createFont(Font.TRUETYPE_FONT, new File("content/weblysleek.ttf")).getFontName(),
+					Font.BOLD, 20);
+		} catch (FontFormatException | IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
+	public Draw getDraw() {
+		return this.pioche;
+	}
+	
 	public void addMenu() {
 		GridBagConstraints c = new GridBagConstraints();
 		this.menu.setBackground(Color.LIGHT_GRAY);
@@ -53,7 +80,7 @@ public class Window extends JFrame {
 			}
 		});
 		c.weightx = 0.2;
-		c.weighty = 0;
+		c.weighty = 0.15;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.anchor = GridBagConstraints.NORTH;
 		c.gridx = 0;
@@ -61,7 +88,7 @@ public class Window extends JFrame {
 		c.gridwidth = 3;
 		c.insets = new Insets(0, 0, 10, 0);
 		this.menu.add(newGame);
-		getContentPane().add(this.menu, c);
+		getContentPane().add(menu, c);
 	}
 
 	public void addGameButtons() {
@@ -74,8 +101,7 @@ public class Window extends JFrame {
 		pick.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Letter uneLettre = pioche.drawTile();
-				System.out.println(uneLettre.info());
+				if (!tray.isWordInProgress()) playingNow.changeLetters(pioche);
 			}
 		});
 		leftBar.add(pick);
@@ -87,13 +113,20 @@ public class Window extends JFrame {
 		validate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//TODO
+				if (tray.isWordInProgress()) {
+					word = new Word(tray);
+					tray.wordValidated();
+					playingNow.setHand(pioche);
+					System.out.println("valider");
+					Window.this.update();
+				}
+				
 			}
 		});
 		leftBar.add(validate);
 		
 		c.weightx = 0.1;
-		c.weighty = 0.333;
+		c.weighty = 0.25;
 		c.fill = GridBagConstraints.CENTER;
 		c.anchor = GridBagConstraints.CENTER;
 		c.gridx = 0;
@@ -103,16 +136,17 @@ public class Window extends JFrame {
 	
 	public void setPlayingNow(Player playingNow) {
 		this.playingNow = playingNow;
-	}
-	
-	public Player getPlayingNow() {
-		return this.playingNow;
+		for (int i=0; i < 15; i++) {
+			for (int j=0; j < 15; j++) {
+				tray.getSpecificSquare(i, j).updatePlayingNowAndTray(playingNow, tray);
+			}
+		}
 	}
 	
 	public void addPlayerInfo() {
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 0.2;
-		c.weighty = 0.333;
+		c.weighty = 0.25;
 		c.fill = GridBagConstraints.CENTER;
 		c.anchor = GridBagConstraints.CENTER;
 		c.gridx = 0;
@@ -125,26 +159,46 @@ public class Window extends JFrame {
 	public void addHandPlayer() {
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 0.2;
-		c.weighty = 0.333;
+		c.weighty = 0.25;
 		c.fill = GridBagConstraints.CENTER;
 		c.anchor = GridBagConstraints.CENTER;
 		c.gridx = 0;
 		c.gridheight = 1;
 		c.gridy = 3;
 		c.gridwidth = 1;
-		playingNow.displayHand();
 		getContentPane().add(playingNow.getHand(), c);
+	}
+	
+	public void addTurnInfo() {
+		getContentPane().remove(remainingLetters);
+		remainingLetters = new JLabel("Lettres restantes : " + pioche.remainingTiles());
+		remainingLetters.setFont(weblysleek);
+		remainingLetters.setHorizontalAlignment(JLabel.CENTER);
+		remainingLetters.setVerticalAlignment(JLabel.CENTER);
+		GridBagConstraints c = new GridBagConstraints();
+		c.weightx = 0.2;
+		c.weighty = 0.25;
+		c.fill = GridBagConstraints.CENTER;
+		c.fill = GridBagConstraints.CENTER;
+		c.gridx = 0;
+		c.gridheight = 1;
+		c.gridy = 4;
+		c.gridwidth = 1;
+		getContentPane().add(remainingLetters, c);
+		if (this.lastPoints != -1 && this.lastWord != null) {
+			getContentPane().add(new JLabel("Dernier mot joué : "), c);
+			getContentPane().add(new JLabel(lastWord + "pour" + lastPoints), c);
+		}			
 	}
 
 	public void addTray() {
 		GridBagConstraints c = new GridBagConstraints();
-		Tray tray = new Tray(this);
 		c.weightx = 0.8;
 		c.weighty = 0.5;
 		c.fill = GridBagConstraints.CENTER;
 		c.anchor = GridBagConstraints.CENTER;
 		c.gridx = 1;
-		c.gridheight = 3;
+		c.gridheight = 4;
 		c.gridy = 1;
 		c.gridwidth = 1;
 		getContentPane().add(tray, c);
@@ -153,5 +207,11 @@ public class Window extends JFrame {
 	public void display() {
 		pack();
 		this.setVisible(true);
+	}
+	
+	public void update() {
+		this.addTurnInfo();
+		this.repaint();
+		this.revalidate();
 	}
 }

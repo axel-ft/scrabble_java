@@ -31,6 +31,7 @@ import javax.swing.border.LineBorder;
  * <p>
  * Modified by Axel on 3/1/17 : added color attribute
  * Modified by Axel on 3/27/17 : added graphical elements from GSquare class
+ * Modified by Axel on 3/28/17 : added updatePlayingNow() and boolean pending
  */
 public class Square extends JPanel {
 	
@@ -39,9 +40,11 @@ public class Square extends JPanel {
 	
 	private int wordMultiplier;
 	private int letterMultiplier;
-	private char content;
-	private boolean needOut;
+	private String content;
+	private boolean used;
+	private boolean pending = false;
 	private Color color;
+	private MyDropTargetListener mdtl;
 	
 	/** The row coordinate of the square */
 	private int x;
@@ -59,11 +62,11 @@ public class Square extends JPanel {
 	 *            And set the 'content' variable as null
 	 *            </p>
 	 */
-	public Square(int wordMultiplier, int letterMultiplier, Color color, int x, int y, Window window) {
+	public Square(int wordMultiplier, int letterMultiplier, Color color, int x, int y) {
 
 		this.wordMultiplier = wordMultiplier;
 		this.letterMultiplier = letterMultiplier;
-		this.content = '\u0000';
+		this.content = "\u0000";
 		this.color = color;
 		
 		this.x = x;
@@ -81,8 +84,7 @@ public class Square extends JPanel {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				System.out.println("test");
-				if (Square.this.content != '\u0000')
+				if (Square.this.content != "\u0000")
 				System.out.println(Square.this.content);
 			}
 
@@ -99,7 +101,7 @@ public class Square extends JPanel {
 			}
 		});
 
-        new MyDropTargetListener(this, window);
+        this.mdtl = new MyDropTargetListener(this);
 	}
 
 	/**
@@ -108,20 +110,50 @@ public class Square extends JPanel {
 	 * Allow a char content on the selected square
 	 * </p>
 	 */
-	public void setSquareContent(char content) {
+	public void setSquareContent(String content) {
 		this.content = content;
+	}
+	
+	public void setPendingFalse() {
+		this.pending = false;
+	}
+	
+	public void setPendingTrue() {
+		this.pending = true;
+	}
+	
+	public boolean getPendingState() {
+		return this.pending;
+	}
+	
+	public int getXSquare() {
+		return this.x;
+	}
+	
+	public int getYSquare() {
+		return this.y;
 	}
 
 	/**
-	 * <h3>Function getSquareContent :</h3><br>
+	 * <h3>Function getSquareContent :</h3>
 	 * <p>
+	 * return the square content if the needOut variable is true
+	 *
 	 * @return the square's content
 	 * </p>
 	 */
-	public char getSquareContent() {
-		return this.content;
+	public String getSquareContent() {
+		return this.content;	
 	}
-
+	
+	/**
+	 * <h3>Function getColor :</h3><br>
+	 * <p>
+	 * Return the color of the square
+	 * </p>
+	 * 
+	 * @return
+	 */
 	public Color getColor() {
 		return this.color;
 	}
@@ -136,28 +168,26 @@ public class Square extends JPanel {
 	 * @return
 	 */
 	public boolean isSquareUsed() {
-		if (this.content == '\u0000') {
+		if (this.content == "\u0000") {
 			return false;
 		} else {
-			this.needOut = true;
+			this.used = true;
 			return true;
 		}
 	}
-
+	
 	/**
-	 * <h3>Function SquareIsUsed :</h3>
+	 * <h3>Function updatePlayingNow :</h3><br>
 	 * <p>
-	 * return the square content if the needOut variable is true
+	 * Updates the now playing character, method used to delete tile from player when dropped on the tray
 	 * </p>
+	 * @param tray 
+	 * @param playingNow
 	 * 
 	 * @return
 	 */
-	public char SquareIsUsed() {
-		if (this.needOut) {
-			return this.content;
-		} else {
-			return '\u0000';
-		}
+	public void updatePlayingNowAndTray(Player playingNow, Tray tray) {
+		mdtl.updatePlayingNowAndTray(playingNow, tray);
 	}
 
 	/**
@@ -204,16 +234,16 @@ public class Square extends JPanel {
 
 		if (this.color.equals(Tray.TW)) {
 			g2.drawString("MOT", 12, 21);
-			g2.drawString("TRIPLE", 7, 33);
+			g2.drawString("TRIPLE", 5, 33);
 		} else if (this.color.equals(Tray.DW) && (this.y != 7 && this.x != 7)) {
 			g2.drawString("MOT", 12, 21);
-			g2.drawString("DOUBLE", 4, 33);
+			g2.drawString("DOUBLE", 2, 33);
 		} else if (this.color.equals(Tray.TL)) {
-			g2.drawString("LETTRE", 6, 21);
-			g2.drawString("TRIPLE", 7, 33);
+			g2.drawString("LETTRE", 5, 21);
+			g2.drawString("TRIPLE", 5, 33);
 		} else if (this.color.equals(Tray.DL)) {
-			g2.drawString("LETTRE", 6, 21);
-			g2.drawString("DOUBLE", 4, 33);
+			g2.drawString("LETTRE", 5, 21);
+			g2.drawString("DOUBLE", 2, 33);
 		} else if (this.x == 7 && this.y == 7) {
 			try {
 				Image img = ImageIO.read(new File("content/star.png"));

@@ -9,8 +9,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -43,30 +41,6 @@ public class Letter extends JPanel  implements Serializable{
 		
 		this.setBackground(null);
 
-		this.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println(Letter.this.getAlpha());
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-			}
-		});
-
 		MyDragGestureListener dlistener = new MyDragGestureListener();
         DragSource ds = new DragSource();
         ds.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, dlistener);
@@ -74,6 +48,10 @@ public class Letter extends JPanel  implements Serializable{
 
 	public void decQtyInDraw() {
 		this.qtyInDraw--;
+	}
+	
+	public void addQtyInDraw() {
+		this.qtyInDraw++;
 	}
 
 	public String getAlpha() {

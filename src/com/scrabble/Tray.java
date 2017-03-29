@@ -39,6 +39,12 @@ public class Tray extends JPanel{
     /** The y square coordinate */
     private int y;
     
+    /** The first letter coordinates of a word being placed, -1 if no word is being placed*/
+    private int Xorigin, Yorigin;
+    
+    /** The first letter coordinates of a word being placed, -1 if no word is being placed*/
+    private int XLastPlaced, YLastPlaced;
+    
     /** The tray. */
     private Square[][] tray = new Square[15][15];
     
@@ -60,7 +66,7 @@ public class Tray extends JPanel{
     /**
      * Instantiates a new tray.
      */
-    public Tray(Window window) {
+    public Tray() {
         //[line], [column], (word, letter)
         //8 TWS, 24 DLS, 12 TLS, 16 DWS
         for (x=0;x<15;x++) {
@@ -69,180 +75,180 @@ public class Tray extends JPanel{
                     case 0:
                         switch (y) {
                             case 0: case 7: case 14:
-                                this.tray[x][y] = new Square(3, 1, TW, x, y, window);
+                                this.tray[x][y] = new Square(3, 1, TW, x, y);
                                 break;
                             case 3: case 11:
-                                this.tray[x][y] = new Square(1, 2, DL, x, y, window);
+                                this.tray[x][y] = new Square(1, 2, DL, x, y);
                                 break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
                     case 1:
                         switch (y) {
                             case 1: case 13:
-                                this.tray[x][y] = new Square(2, 1, DW, x, y, window);
+                                this.tray[x][y] = new Square(2, 1, DW, x, y);
                                 break;
                             case 5: case 9:
-                                this.tray[x][y] = new Square(1, 3, TL, x, y, window);
+                                this.tray[x][y] = new Square(1, 3, TL, x, y);
                                 break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
                     case 2:
                         switch (y) {
                             case 2: case 12:
-                                this.tray[x][y] = new Square(2, 1, DW, x, y, window);
+                                this.tray[x][y] = new Square(2, 1, DW, x, y);
                                 break;
                             case 6: case 8:
-                                this.tray[x][y] = new Square(1, 2, DL, x, y, window);
+                                this.tray[x][y] = new Square(1, 2, DL, x, y);
                                 break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
                     case 3:
                         switch (y) {
                             case 3: case 11:
-                                this.tray[x][y] = new Square(2, 1, DW, x, y, window);
+                                this.tray[x][y] = new Square(2, 1, DW, x, y);
                                 break;
                             case 0: case 7: case 14:
-                                this.tray[x][y] = new Square(1, 2, DL, x, y, window);
+                                this.tray[x][y] = new Square(1, 2, DL, x, y);
                                 break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
                     case 4:
                         switch (y) {
                             case 4: case 10:
-                                this.tray[x][y] = new Square(2, 1, DW, x, y, window);
+                                this.tray[x][y] = new Square(2, 1, DW, x, y);
                                 break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
                     case 5:
                         switch (y) {
                             case 1: case 5: case 9: case 13:
-                                this.tray[x][y] = new Square(1, 3, TL, x, y, window);
+                                this.tray[x][y] = new Square(1, 3, TL, x, y);
                                 break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
                     case 6:
                         switch (y) {
                             case 2: case 6: case 8: case 12:
-                                this.tray[x][y] = new Square(1, 2, DL, x, y, window);
+                                this.tray[x][y] = new Square(1, 2, DL, x, y);
                                 break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
                     case 7:
                         switch (y) {
                             case 0: case 14:
-                                this.tray[x][y] = new Square(3, 1, TW, x, y, window);
+                                this.tray[x][y] = new Square(3, 1, TW, x, y);
                                 break;
                             case 3: case 11:
-                                this.tray[x][y] = new Square(1, 2, DL, x, y, window);
+                                this.tray[x][y] = new Square(1, 2, DL, x, y);
                                 break;
                             case 7:
-                            	this.tray[x][y] = new Square(2,1, DW, x, y, window);
+                            	this.tray[x][y] = new Square(2,1, DW, x, y);
                             	break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
                     case 8:
                         switch (y) {
                             case 2: case 6: case 8: case 12:
-                                this.tray[x][y] = new Square(1, 2, DL, x, y, window);
+                                this.tray[x][y] = new Square(1, 2, DL, x, y);
                                 break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
                     case 9:
                         switch (y) {
                             case 1: case 5: case 9: case 13:
-                                this.tray[x][y] = new Square(1, 3, TL, x, y, window);
+                                this.tray[x][y] = new Square(1, 3, TL, x, y);
                                 break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
                     case 10:
                         switch (y) {
                             case 4: case 10:
-                                this.tray[x][y] = new Square(2, 1, DW, x, y, window);
+                                this.tray[x][y] = new Square(2, 1, DW, x, y);
                                 break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
                     case 11:
                         switch (y) {
                             case 3: case 11:
-                                this.tray[x][y] = new Square(2, 1, DW, x, y, window);
+                                this.tray[x][y] = new Square(2, 1, DW, x, y);
                                 break;
                             case 0: case 7: case 14:
-                                this.tray[x][y] = new Square(1, 2, DL, x, y, window);
+                                this.tray[x][y] = new Square(1, 2, DL, x, y);
                                 break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
                     case 12:
                         switch (y) {
                             case 2: case 12:
-                                this.tray[x][y] = new Square(2, 1, DW, x, y, window);
+                                this.tray[x][y] = new Square(2, 1, DW, x, y);
                                 break;
                             case 6: case 8:
-                                this.tray[x][y] = new Square(1, 2, DL, x, y, window);
+                                this.tray[x][y] = new Square(1, 2, DL, x, y);
                                 break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
                     case 13:
                         switch (y) {
                             case 1: case 13:
-                                this.tray[x][y] = new Square(2, 1, DW, x, y, window);
+                                this.tray[x][y] = new Square(2, 1, DW, x, y);
                                 break;
                             case 5: case 9:
-                                this.tray[x][y] = new Square(1, 3, TL, x, y, window);
+                                this.tray[x][y] = new Square(1, 3, TL, x, y);
                                 break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
                     case 14:
                         switch (y) {
                             case 0: case 7: case 14:
-                                this.tray[x][y] = new Square(3, 1, TW, x, y, window);
+                                this.tray[x][y] = new Square(3, 1, TW, x, y);
                                 break;
                             case 3: case 11:
-                                this.tray[x][y] = new Square(1, 2, DL, x, y, window);
+                                this.tray[x][y] = new Square(1, 2, DL, x, y);
                                 break;
                             default:
-                                this.tray[x][y] = new Square(1, 1, STD, x, y, window);
+                                this.tray[x][y] = new Square(1, 1, STD, x, y);
                                 break;
                         }
                         break;
@@ -257,6 +263,87 @@ public class Tray extends JPanel{
 			int y = i % ELEMENTS;
 			this.add(this.tray[x][y]);
 		}
+    }
+    
+    public boolean isWordInProgress() {
+    	for (int i=0; i<ELEMENTS; i++) {
+    		for (int j=0; j<ELEMENTS; j++) {
+    			if (this.tray[i][j].getPendingState()) {
+    				this.Xorigin = this.tray[i][j].getXSquare();
+    				this.Yorigin = this.tray[i][j].getYSquare();
+    				return true;
+    			}
+    		}
+    	}
+    	this.Xorigin = -1;
+    	this.Yorigin = -1;
+    	return false;
+    }
+    
+    public boolean isWordHorizontal() {
+    	for (int i=0; i<ELEMENTS; i++) {
+    		for (int j=0; j<ELEMENTS; j++) {
+    			if (j == 0 && this.tray[i][j].getPendingState() && this.tray[i][j+1].getPendingState()) {
+    				return true;
+    			}
+    			if ((j != 0 && j != ELEMENTS-1) && this.tray[i][j].getPendingState() && (this.tray[i][j+1].getPendingState() || this.tray[i][j-1].getPendingState())) {
+    				return true;
+    			}
+    			if (j == ELEMENTS && this.tray[i][j].getPendingState() && this.tray[i][j-1].getPendingState()) {
+    				return true;
+    			}
+    		}
+    	}
+    	return false;
+    }
+    
+    public boolean isWordVertical() {
+    	for (int i=0; i<ELEMENTS; i++) {
+    		for (int j=0; j<ELEMENTS; j++) {
+    			if (i == 0 && this.tray[i][j].getPendingState() && this.tray[i+1][j].getPendingState()) {
+    				return true;
+    			}
+    			if ((i != 0 && i != ELEMENTS-1) && this.tray[i][j].getPendingState() && (this.tray[i+1][j].getPendingState() || this.tray[i-1][j].getPendingState())) {
+    				return true;
+    			}
+    			if (i == ELEMENTS && this.tray[i][j].getPendingState() && this.tray[i-1][j].getPendingState()) {
+    				return true;
+    			}
+    		}
+    	}
+    	return false;
+    }
+    
+    public void wordValidated() {
+    	for (int i=0; i<ELEMENTS; i++) {
+    		for (int j=0; j<ELEMENTS; j++) {
+    			this.tray[i][j].setPendingFalse();
+    		}
+    	}
+    }
+    
+    public int getXorigin() {
+    	return Xorigin;
+    }
+    
+    public int getYorigin() {
+    	return Yorigin;
+    }
+    
+    public void setXLastPlaced(int x) {
+    	this.XLastPlaced = x;
+    }
+    
+    public void setYLastPlaced(int y) {
+    	this.YLastPlaced = y;
+    }
+
+    public int getXLastPlaced() {
+    	return this.XLastPlaced;
+    }
+    
+    public int getYLastPlaced() {
+    	return this.YLastPlaced;
     }
     
 	/**

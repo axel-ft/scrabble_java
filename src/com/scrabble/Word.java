@@ -1,23 +1,16 @@
 package com.scrabble;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
-public class Words {
+public class Word {
 
-	public String mot;
+	public String word;
+	private String[] splittedWord;
 
-	private String[] words;
-
-	private static Scanner scan;
-
-	public Words() {
-		System.out.println("Ajouter Votre Mot");
-		scan = new Scanner(System.in);
-		this.mot = scan.nextLine();
-		System.out.println("Votre Mot est " + this.mot);
-		this.words = this.mot.split("");
-		System.out.println(Arrays.deepToString(this.words));
+	public Word(Tray tray) {
+		this.scanTray(tray);
+		//this.splittedWord = this.word.split("");
+		//System.out.println(Arrays.deepToString(this.splittedWord));
 	}
 
 	/**
@@ -40,12 +33,24 @@ public class Words {
 	public int calScore(Draw gameDraw) {
 		int wordScore = 0;
 
-		for (int i = 0; i < this.words.length; i++) {
-			if (gameDraw.returnCaseIndice(this.words[i]) != null) {
-				wordScore += gameDraw.returnCaseIndice(this.words[i]).getPoint();
+		for (int i = 0; i < this.splittedWord.length; i++) {
+			if (gameDraw.returnCaseIndice(this.splittedWord[i]) != null) {
+				wordScore += gameDraw.returnCaseIndice(this.splittedWord[i]).getPoint();
 			}
 		}
 		return wordScore;
+	}
+	
+	public void scanTray(Tray tray) {
+		String word = null;
+		for (int i=0; i<15; i++) {
+			for (int j=0; j<15; j++) {
+				if (tray.getSpecificSquare(i, j).getPendingState()) {
+					System.out.println(String.valueOf(i) + String.valueOf(j) + " - " + tray.getSpecificSquare(i, j).getSquareContent());
+				}
+			}
+		}
+		this.word = word;
 	}
 
 }

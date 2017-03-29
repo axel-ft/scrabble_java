@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.io.File;
 import java.io.IOException;
@@ -102,23 +101,16 @@ public class Player extends JPanel {
 		}
 	}
 	
-	public int getIndex(Letter letter) {
+	public void removeSpecificTile(Letter letter) {
 		int index = -1;
 		for (int i=0; i<MAXLETTERS; i++) {
 			if (this.tileSet[i] != null && letter.getAlpha().equals(this.tileSet[i].getAlpha()))  {
 				index = i;
-				return index;
 			}
 		}
-		return index;
-	}
-	
-	public void removeSpecificTile(int i) {
-		if (i<MAXLETTERS && i != -1 && this.tileSet[i] != null) {
-			this.tileSet[i] = null;
+		if (index<MAXLETTERS && index != -1 && this.tileSet[index] != null) {
+			this.tileSet[index] = null;
 			this.updateHand();
-		} else {
-			return;
 		}
 	}
 	
@@ -128,15 +120,8 @@ public class Player extends JPanel {
 				this.tileSet[i] = draw.drawTile();
 			}
 		}
-	}
-	
-	public void displayHand() {
-		System.out.println("Lettre Quantité Points");
-		for (int i = 0; i < MAXLETTERS; i++) {
-			if(tileSet[i] != null) {
-				System.out.println(this.tileSet[i].info());
-			}
-		}
+
+		this.updateHand();
 	}
 	
 	private JPanel Hand = new JPanel() {
@@ -161,7 +146,16 @@ public class Player extends JPanel {
 		return this.Hand;
 	}
 	
-	public void updateHand() {
+	public void changeLetters(Draw pioche) {
+		for (int i=0; i<this.tileSet.length; i++) {
+			this.tileSet[i].addQtyInDraw();
+			this.tileSet[i] = null;
+		}
+		this.setHand(pioche);
+		this.updateHand();
+	}
+	
+	private void updateHand() {
 		this.Hand.removeAll();
 		this.Hand.setLayout(new FlowLayout());
 		this.Hand.setBackground(Color.LIGHT_GRAY);
