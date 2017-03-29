@@ -265,13 +265,50 @@ public class Tray extends JPanel{
 		}
     }
     
+    public Square isOneSquarePending() {
+    	int count = 0;
+    	int x = -1, y = -1;
+    	for (int i=0; i<ELEMENTS; i++) {
+    		for (int j=0; j<ELEMENTS; j++) {
+    			if (this.tray[i][j].getPendingState()) {
+   					count++;
+   					x=i;
+   					y=j;
+    			}
+    		}
+    	}
+    	if (count == 1 && x != -1 && y != -1) {
+    		return this.tray[x][y];
+    	} else {
+    		return null;
+    	}
+    }
+    
+    public boolean isLetterValid() {
+    	for (int i=0; i<ELEMENTS; i++) {
+    		for (int j=0; j<ELEMENTS; j++) {
+    			if (this.tray[i][j].getPendingState()) {
+    				if((i<ELEMENTS-1 && this.tray[i+1][j].getSquareContent() != "\u0000") || (i>0 && this.tray[i-1][j].getSquareContent() != "\u0000")) {
+        				return true;
+    				}
+    				if((j<ELEMENTS-1 && this.tray[i][j+1].getSquareContent() != "\u0000") || (j>0 && this.tray[i][j-1].getSquareContent() != "\u0000")) {
+        				return true;
+    				}
+    			}
+    		}
+    	}
+    	return false;
+    }
+    
     public boolean isWordInProgress() {
     	for (int i=0; i<ELEMENTS; i++) {
     		for (int j=0; j<ELEMENTS; j++) {
     			if (this.tray[i][j].getPendingState()) {
-    				this.Xorigin = this.tray[i][j].getXSquare();
-    				this.Yorigin = this.tray[i][j].getYSquare();
-    				return true;
+    				if (this.isWordHorizontal() || this.isWordVertical()) {
+    					this.Xorigin = this.tray[i][j].getXSquare();
+    					this.Yorigin = this.tray[i][j].getYSquare();
+    					return true;
+    				}
     			}
     		}
     	}
@@ -396,7 +433,7 @@ public class Tray extends JPanel{
      * @return the specific square
      */
     public Square getSpecificSquare(int x, int y) {
-    	if (x < 15 && y < 15) {
+    	if (x < 15 && y < 15 && x > -1 && y > -1) {
     		return tray[x][y];
     	} else {
     		return null;

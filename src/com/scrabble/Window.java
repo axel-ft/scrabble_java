@@ -113,7 +113,8 @@ public class Window extends JFrame {
 		validate.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (tray.isWordInProgress()) {
+				if (tray.isWordInProgress() || tray.isLetterValid()) {
+					System.out.println(tray.getSpecificSquare(7, 7).getSquareContent());
 					word = new Word(tray);
 					tray.wordValidated();
 					playingNow.setHand(pioche);
