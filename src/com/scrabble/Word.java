@@ -12,15 +12,13 @@ public class Word {
 	private int wordMult = 1;
 	private Tray tray;
 	private Draw draw;
-	private Player playing;
 	private int xCursor, yCursor;
 
-	public Word(Tray tray, Draw draw, Player playing) {
+	public Word(Tray tray, Draw draw) {
 		this.xCursor = tray.getXorigin();
 		this.yCursor = tray.getYorigin();
 		this.tray = tray;
 		this.draw = draw;
-		this.playing = playing;
 	}
 	
 	public List<String> getWords() {
@@ -97,7 +95,6 @@ public class Word {
 		if (word!=null) {
 			if (dico.checkWord(word)) {
 				this.wordScore *= this.wordMult;
-				this.playing.addScore(wordScore);
 				this.words.add(this.word);
 				return true;
 			}

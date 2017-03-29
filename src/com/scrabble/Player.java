@@ -30,11 +30,11 @@ public class Player extends JPanel {
 	 */
 	private static final long serialVersionUID = 5236598157451041948L;
 	
-	private static final JLabel votreTour = new JLabel("A vous de jouer");
+	private JLabel votreTour = new JLabel("A vous de jouer");
 	
 	private Font weblysleek = null;
 	private JLabel nameLabel = new JLabel();
-	private JLabel timer = new JLabel();
+	private JLabel scoreLabel = new JLabel();
 	
 	public Player (){
 		System.out.println("Veuillir remplir votre pseudo");
@@ -61,11 +61,7 @@ public class Player extends JPanel {
 		this.nameLabel.setVerticalAlignment(JLabel.CENTER);
 		this.add(nameLabel);
 		
-		this.timer.setFont(weblysleek);
-		this.timer.setText(String.valueOf(this.score));
-		this.timer.setHorizontalAlignment(JLabel.CENTER);
-		this.timer.setVerticalAlignment(JLabel.CENTER);
-		this.add(timer);
+		this.updateScoreLabel();
 	}
 	
 	protected void loadFont () {
@@ -76,6 +72,15 @@ public class Player extends JPanel {
 		} catch (FontFormatException | IOException e1) {
 			e1.printStackTrace();
 		}
+	}
+	
+	public void updateScoreLabel() {
+		this.remove(scoreLabel);
+		this.scoreLabel.setFont(weblysleek);
+		this.scoreLabel.setText(String.valueOf(this.score));
+		this.scoreLabel.setHorizontalAlignment(JLabel.CENTER);
+		this.scoreLabel.setVerticalAlignment(JLabel.CENTER);
+		this.add(scoreLabel);
 	}
 	
 	public void setName(String name){

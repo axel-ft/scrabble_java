@@ -132,7 +132,7 @@ public class Window extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (tray.isWordInProgress() || tray.isLetterValid()) {
-					word = new Word(tray, pioche, players[playingNow]);
+					word = new Word(tray, pioche);
 					if (word.scanTray()) {
 						Window.this.lastPoints = word.getWordScore();
 						players[playingNow].addScore(lastPoints);
@@ -308,6 +308,7 @@ public class Window extends JFrame {
 		this.addMenu();
 		this.addGameButtons();
 		this.addTray();
+		this.players[playingNow].updateScoreLabel();
 		this.addPlayerInfo();
 		this.addHandPlayer();
 		this.addTurnInfo();
