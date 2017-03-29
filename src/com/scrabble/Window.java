@@ -118,6 +118,7 @@ public class Window extends JFrame {
 				if (!tray.isWordInProgress()) {
 					players[playingNow].changeLetters(pioche);
 					Window.this.setPlayingNow();
+					Window.this.update();
 				}
 			}
 		});
@@ -134,6 +135,7 @@ public class Window extends JFrame {
 					word = new Word(tray, pioche, players[playingNow]);
 					if (word.scanTray()) {
 						Window.this.lastPoints = word.getWordScore();
+						players[playingNow].addScore(lastPoints);
 						Window.this.lastWords = word.getWords();
 						tray.wordValidated();
 						players[playingNow].setHand(pioche);

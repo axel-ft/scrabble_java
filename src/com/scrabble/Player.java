@@ -62,7 +62,7 @@ public class Player extends JPanel {
 		this.add(nameLabel);
 		
 		this.timer.setFont(weblysleek);
-		this.timer.setText("Timer");
+		this.timer.setText(String.valueOf(this.score));
 		this.timer.setHorizontalAlignment(JLabel.CENTER);
 		this.timer.setVerticalAlignment(JLabel.CENTER);
 		this.add(timer);
