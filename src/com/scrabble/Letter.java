@@ -1,82 +1,113 @@
 package com.scrabble;
 
-import java.util.Random;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragSource;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
+
+import javax.swing.JPanel;
 
 /**
- * Created by pault on 23/02/2017.
+ * 
+ * 
+ * Modified by Axel on 3/27/17 : added graphical elements from GLetter class
  */
-public class Letter {
+public class Letter extends JPanel  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2428140169992149810L;
+	private String alpha;
+	private int point;
+	private int qtyInDraw;
 
-	String[][] letter = new String[27][3];
+	private static final Color SAND = new Color(204, 205, 169);
 
 	public Letter() {
-		this.letter[0] = new String[] { "*", "2", "0" };
-		this.letter[1] = new String[] { "a", "9", "1" };
-		this.letter[2] = new String[] { "b", "2", "3" };
-		this.letter[3] = new String[] { "c", "2", "3" };
-		this.letter[4] = new String[] { "d", "3", "2" };
-		this.letter[5] = new String[] { "e", "15", "1" };
-		this.letter[6] = new String[] { "f", "2", "4" };
-		this.letter[7] = new String[] { "g", "2", "2" };
-		this.letter[8] = new String[] { "h", "2", "4" };
-		this.letter[9] = new String[] { "i", "8", "1" };
-		this.letter[10] = new String[] { "j", "1", "8" };
-		this.letter[11] = new String[] { "k", "1", "10" };
-		this.letter[12] = new String[] { "l", "5", "1" };
-		this.letter[13] = new String[] { "m", "3", "2" };
-		this.letter[14] = new String[] { "n", "6", "1" };
-		this.letter[15] = new String[] { "o", "6", "1" };
-		this.letter[16] = new String[] { "p", "2", "3" };
-		this.letter[17] = new String[] { "q", "1", "8" };
-		this.letter[18] = new String[] { "r", "6", "1" };
-		this.letter[19] = new String[] { "s", "6", "1" };
-		this.letter[20] = new String[] { "t", "6", "1" };
-		this.letter[21] = new String[] { "u", "6", "1" };
-		this.letter[22] = new String[] { "v", "2", "4" };
-		this.letter[23] = new String[] { "w", "1", "10" };
-		this.letter[24] = new String[] { "x", "1", "10" };
-		this.letter[25] = new String[] { "y", "1", "10" };
-		this.letter[26] = new String[] { "z", "1", "10" };
 	}
 
-	public void displayLettre() {
-		System.out.println("Alpha  Number  Points");
-		for (int i = 0; i < this.letter.length; i++) {
-			for (int j = 0; j < this.letter[i].length; j++) {
-				System.out.printf(this.letter[i][j] + "       ");
-			}
-			System.out.printf("\r\n");
-		}
+	public Letter(String alpha, int point, int qty) {
+		this.alpha = alpha;
+		this.qtyInDraw = qty;
+		this.point = point;
+		
+		this.setBackground(null);
 
+		MyDragGestureListener dlistener = new MyDragGestureListener();
+        DragSource ds = new DragSource();
+        ds.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, dlistener);
+	}
+	
+	public void resetDrag() {
+		MyDragGestureListener dlistener = new MyDragGestureListener();
+        DragSource ds = new DragSource();
+        ds.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_MOVE, dlistener);
 	}
 
-	String[][] handPlayer = new String[7][3];
-
-	public void handPlayer() {
-		Random randoml = new Random();
-		for (int r = 0; r < this.handPlayer.length; r++) {
-			int  n = randoml.nextInt(26) + 1;
-			for (int i = 0; i < this.handPlayer[r].length; i++) {
-				this.handPlayer[r][i] = this.letter[n][i];
-			}
-		}
-
+	public void decQtyInDraw() {
+		this.qtyInDraw--;
+	}
+	
+	public void addQtyInDraw() {
+		this.qtyInDraw++;
 	}
 
-	public void getHand() {
-		System.out.println("Votre Main est : \n\r");
-		System.out.println("Alpha  Number  Points");
-		for (int i = 0; i < this.handPlayer.length; i++) {
-			for (int j = 0; j < this.handPlayer[i].length; j++) {
-				System.out.printf(this.letter[i][j]);
-			}
-			System.out.printf("\r\n");
-		}
-
+	public String getAlpha() {
+		return this.alpha;
 	}
 
-	/*
-	 * private void createUIComponents() { // TODO: place custom component
-	 * creation code here }
+	public int getPoint() {
+		return this.point;
+	}
+
+	public int getQtyInDraw() {
+		return this.qtyInDraw;
+	}
+	
+	public String info(){
+		return this.alpha + "   "  + this.qtyInDraw + "   " +  this.point;
+	}
+	
+	/**
+	 * @see javax.swing.JComponent#getPreferredSize()
 	 */
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(Tray.getWIDTH() - 4, Tray.getHEIGHT() - 4);
+	}
+
+	/**
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		Font weblysleek = null;
+		Font weblysleekSmall = null;
+		try {
+			weblysleek = new Font(Font.createFont(Font.TRUETYPE_FONT, new File("content/weblysleek.ttf")).getFontName(), Font.BOLD,
+					35);
+			weblysleekSmall = weblysleek.deriveFont((float) 10);
+		} catch (FontFormatException | IOException e1) {
+			e1.printStackTrace();
+		}
+				g2.setColor(SAND);
+				g2.fillRoundRect(0, 0, Tray.getWIDTH(), Tray.getHEIGHT(), 5, 5);
+				g2.setColor(Color.black);
+				g2.drawRoundRect(0, 0, 40, 40, 5, 5);
+				g2.setFont(weblysleek);
+				g2.drawString(this.getAlpha(), 5, 30);
+				g2.setFont(weblysleekSmall);
+				g2.drawString(String.valueOf(this.getPoint()), 27, 38);
+	}
 }
